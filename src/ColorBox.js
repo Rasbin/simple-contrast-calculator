@@ -1,5 +1,6 @@
 import React from "react";
 import "./ColorBox.css";
+import HexToHSL from './utils/HexToHSL';
 
 class ColorBox extends React.Component {
   state = {
@@ -9,15 +10,18 @@ class ColorBox extends React.Component {
     hslColor1hue: 290,
     hslColor1saturation: 87,
     hslColor1lightness: 47,
+    // hslColor1: 'hsl(290, 87%, 47%)',
     hslColor2hue: 212,
     hslColor2saturation: 72,
     hslColor2lightness: 59,
+    // hslColor2: 'hsl(212, 72%, 59%)',
     hslColor3hue: 0,
     hslColor3saturation: 0,
     hslColor3lightness: 61,
+    // hslColor3: 'hsl(0,0,61%)',
   }
 
-  handleColorChange = (e) => {
+  handleHexColorChange = (e) => {
     e.preventDefault();
     this.props.colorNumber === 1
     ? this.setState({
@@ -31,6 +35,17 @@ class ColorBox extends React.Component {
       hexColor3: e.target.value
     })
     );
+
+    // Update HSL values too when HEX values get changed
+    const updatedHSL1 = HexToHSL(this.state.hexColor1);
+    const updatedHSL2 = HexToHSL(this.state.hexColor2);
+    const updatedHSL3 = HexToHSL(this.state.hexColor3);
+
+    this.setState({
+      hslColor1: updatedHSL1,
+      hslColor2: updatedHSL2,
+      hslColor3: updatedHSL3,
+    });
   }
 
   handleHSLupdate = (e) => {
@@ -93,6 +108,11 @@ class ColorBox extends React.Component {
     const hslColor2 = 'hsl(' + this.state.hslColor2hue + ", " + this.state.hslColor2saturation + '%, ' + this.state.hslColor2lightness + "%)";
     const hslColor3 = 'hsl(' + this.state.hslColor3hue + ", " + this.state.hslColor3saturation + '%, ' + this.state.hslColor3lightness + "%)";
 
+    // this.setState({
+    //   hslColor1: hslColor1,
+    //   hslColor2: hslColor2,
+    //   hslColor3: hslColor3,
+    // })
 
     let hslColor = this.props.colorNumber === 1
     ? hslColor1
@@ -149,7 +169,7 @@ class ColorBox extends React.Component {
             : this.state.hexColor3
             )
           }
-          onChange={this.handleColorChange}
+          onChange={this.handleHexColorChange}
         />
       </div>
     );

@@ -35,19 +35,50 @@ class ColorBox extends React.Component {
 
   handleHSLupdate = (e) => {
     e.preventDefault();
+    console.log('Value', e.target.value);
+    console.log('ID', e.target.id);
 
+    // Update first box HSL Color
     this.props.colorNumber === 1
-    ? this.setState({
-      hslColor1: e.target.value
-    })
+    ? (e.target.id === "hue"
+        ? this.setState({
+            hslColor1hue: e.target.value
+        }) : ((e.target.id === "saturation")
+        ? this.setState({
+            hslColor1saturation: e.target.value
+        })
+        : this.setState({
+            hslColor1lightness: e.target.value
+        }))
+      )
+    
+    // Update second box HSL color
     : (this.props.colorNumber === 2
-    ? this.setState({
-      hslColor2: e.target.value
-    })
-    : this.setState({
-      hslColor3: e.target.value
-    })
-    );
+    ? (e.target.id === "hue"
+        ? this.setState({
+            hslColor2hue: e.target.value
+        }) : ((e.target.id === "saturation")
+        ? this.setState({
+            hslColor2saturation: e.target.value
+        })
+        : this.setState({
+            hslColor2lightness: e.target.value
+        }))
+      )
+
+      // Update third box HSL color
+      : (e.target.id === "hue"
+      ? this.setState({
+          hslColor3hue: e.target.value
+      }) : ((e.target.id === "saturation")
+      ? this.setState({
+          hslColor3saturation: e.target.value
+      })
+      : this.setState({
+          hslColor3lightness: e.target.value
+      }))
+    )
+      )
   }
 
   render() {

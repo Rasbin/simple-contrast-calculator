@@ -39,9 +39,26 @@ class ColorBox extends React.Component {
           className="displayColor"
           style={{backgroundColor: displayColor}}>
         </div>
-        <div className="picker"></div>
-        <p>Saturation</p>
-        <p>Brightness</p>
+        <div className="picker">
+          <br />
+          Hue <input
+                type="range"
+                min="0"
+                max="360"
+                step="1"
+                id="hue" /><br />
+          Saturation <input
+                      type="range"
+                      min="0" max="100"
+                      step="1"
+                      id="saturation" /><br />
+          Brightness <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      step="1"
+                      id="brightness" /><br />
+        </div>
         <p>Hex</p>
         <input
           type="text"

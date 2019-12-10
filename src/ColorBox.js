@@ -133,7 +133,6 @@ class ColorBox extends React.Component {
     );
 
     console.log('HSL Color 1', this.state.hslColor1);
-    console.log('HEX Value 1 After conversion function ', this.state.hexColor1);
 
     return (
       <div className="colorBox">
@@ -142,10 +141,6 @@ class ColorBox extends React.Component {
           className="displayColor"
           style={{backgroundColor: displayColor}}>
         </div><br />
-        <div
-          className="displayColor"
-          style={{backgroundColor: hslColor}}>
-        </div>
         <div>
           {hslColor}
         </div>
@@ -157,12 +152,24 @@ class ColorBox extends React.Component {
                 max="360"
                 step="1"
                 id="hue"
+                value={this.props.colorNumber === 1
+                ? this.state.hslColor1hue
+                : (this.props.colorNumber === 2
+                ? this.state.hslColor2hue
+                : this.state.hslColor3hue
+                )}
                 onChange={this.handleHSLupdate}/><br />
           Saturation <input
                       type="range"
                       min="0" max="100"
                       step="1"
                       id="saturation"
+                      value={this.props.colorNumber === 1
+                      ? this.state.hslColor1saturation
+                      : (this.props.colorNumber === 2
+                      ? this.state.hslColor2saturation
+                      : this.state.hslColor2saturation
+                      )}
                       onChange={this.handleHSLupdate} /><br />
           Brightness <input
                       type="range"
@@ -170,6 +177,12 @@ class ColorBox extends React.Component {
                       max="100"
                       step="1"
                       id="brightness"
+                      value={this.props.colorNumber === 1
+                      ? this.state.hslColor1lightness
+                      : (this.props.colorNumber === 2
+                      ? this.state.hslColor2lightness
+                      : this.state.hslColor3lightness
+                      )}
                       onChange={this.handleHSLupdate} /><br />
         </div>
         <p>Hex</p>

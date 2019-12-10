@@ -1,6 +1,8 @@
 import React from "react";
 import "./ColorBox.css";
 import HexToHSL from './utils/HexToHSL';
+import HSLToHex from './utils/HSLToHex';
+
 
 class ColorBox extends React.Component {
   state = {
@@ -97,6 +99,20 @@ class ColorBox extends React.Component {
       hslColor3: hslColor3,
     })
 
+    // Send HSL value to HSLToHexFunction and update HEX value in state
+      this.props.colorNumber === 1
+      ? this.setState({
+        hexColor1: HSLToHex(this.state.hslColor1hue, this.state.hslColor1saturation, this.state.hslColor1lightness),
+      })
+      : (this.props.colorNumber === 2
+      ? this.setState({
+        hexColor2: HSLToHex(this.state.hslColor2hue, this.state.hslColor2saturation, this.state.hslColor2lightness),
+      })
+      : this.setState({
+        hexColor3: HSLToHex(this.state.hslColor3hue, this.state.hslColor3saturation, this.state.hslColor3lightness),
+      })
+      );
+
   }
 
   render() {
@@ -117,6 +133,7 @@ class ColorBox extends React.Component {
     );
 
     console.log('HSL Color 1', this.state.hslColor1);
+    console.log('HEX Value 1 After conversion function ', this.state.hexColor1);
 
     return (
       <div className="colorBox">

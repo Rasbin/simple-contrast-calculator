@@ -1,5 +1,6 @@
 import React from 'react';
 import ColorBox from './ColorBox';
+import CurrentColorContrast from './CurrentColorContrast';
 import './App.css';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <ColorBox colorNumber={1} />
       <ColorBox colorNumber={2} />
       <ColorBox colorNumber={3} />
+      <CurrentColorContrast />
     </div>
   );
 }

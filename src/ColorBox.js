@@ -185,7 +185,7 @@ class ColorBox extends React.Component {
                       )}
                       onChange={this.handleHSLupdate} /><br />
         </div>
-        <p>Hex</p>
+        <span>Hex </span>
         <input
           type="text"
           value={

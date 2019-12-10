@@ -13,3 +13,10 @@
   width: 100%;
   height: 50px;
 }
+
+input[type="text"] {
+  padding: 15px 15px;
+  border: 2px solid grey;
+  border-radius: 8px;
+  margin-top: 10px;
+}

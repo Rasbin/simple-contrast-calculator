@@ -23,26 +23,23 @@ class App extends React.Component {
     hslColor3: 'hsl(0, 0%, 61%)',
   }
 
-  // Brought this function from ColorBox START
-  handleHexColorChange = (e) => {
-    e.preventDefault();
-    this.props.colorNumber === 1
+  handleHexColorChange = (colorNumber, hexColorValue) => {
+    colorNumber === 1
     ? this.setState({
-      hexColor1: e.target.value,
-      hslColor1: HexToHSL(e.target.value),
+      hexColor1: hexColorValue,
+      hslColor1: HexToHSL(hexColorValue),
     })
-    : (this.props.colorNumber === 2
+    : (colorNumber === 2
     ? this.setState({
-      hexColor2: e.target.value,
-      hslColor2: HexToHSL(e.target.value),
+      hexColor2: hexColorValue,
+      hslColor2: HexToHSL(hexColorValue),
     })
     : this.setState({
-      hexColor3: e.target.value,
-      hslColor3: HexToHSL(e.target.value),
+      hexColor3: hexColorValue,
+      hslColor3: HexToHSL(hexColorValue),
     })
     );
   }
-  // Brought this function from ColorBox END
 
   render() {
     return (
@@ -55,6 +52,7 @@ class App extends React.Component {
           hslColor1saturation={this.state.hslColor1saturation}
           hslColor1lightness={this.state.hslColor1lightness}
           hslColor1={this.state.hslColor1}
+          parentCallBackHexColorChange={this.handleHexColorChange}
         />
         <ColorBox
           colorNumber={2}
@@ -63,6 +61,7 @@ class App extends React.Component {
           hslColor2saturation={this.state.hslColor2saturation}
           hslColor2lightness={this.state.hslColor2lightness}
           hslColor2={this.state.hslColor2}
+          parentCallBackHexColorChange={this.handleHexColorChange}
         />
         <ColorBox
           colorNumber={3}
@@ -71,6 +70,7 @@ class App extends React.Component {
           hslColor3saturation={this.state.hslColor3saturation}
           hslColor3lightness={this.state.hslColor3lightness}
           hslColor3={this.state.hslColor3}
+          parentCallBackHexColorChange={this.handleHexColorChange}
         />
         <CurrentColorContrast />
       </div>

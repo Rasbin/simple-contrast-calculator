@@ -4,6 +4,11 @@ import HSLToHex from './utils/HSLToHex';
 
 
 class ColorBox extends React.Component {
+  handleHexColorChange = (e) => {
+    e.preventDefault();
+    this.props.parentCallBackHexColorChange(this.props.colorNumber, e.target.value);
+  }
+
   handleHSLupdate = (e) => {
     e.preventDefault();
     console.log('Value', e.target.value);
@@ -74,7 +79,6 @@ class ColorBox extends React.Component {
         hexColor3: HSLToHex(this.state.hslColor3hue, this.state.hslColor3saturation, this.state.hslColor3lightness),
       })
       );
-
   }
 
   render() {

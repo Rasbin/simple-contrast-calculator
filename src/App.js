@@ -1,6 +1,7 @@
 import React from 'react';
 import ColorBox from './ColorBox';
 import CurrentColorContrast from './CurrentColorContrast';
+import HexToHSL from './utils/HexToHSL';
 import './App.css';
 
 class App extends React.Component {
@@ -21,6 +22,28 @@ class App extends React.Component {
     hslColor3lightness: 61,
     hslColor3: 'hsl(0, 0%, 61%)',
   }
+
+  // Brought this function from ColorBox START
+  handleHexColorChange = (e) => {
+    e.preventDefault();
+    this.props.colorNumber === 1
+    ? this.setState({
+      hexColor1: e.target.value,
+      hslColor1: HexToHSL(e.target.value),
+    })
+    : (this.props.colorNumber === 2
+    ? this.setState({
+      hexColor2: e.target.value,
+      hslColor2: HexToHSL(e.target.value),
+    })
+    : this.setState({
+      hexColor3: e.target.value,
+      hslColor3: HexToHSL(e.target.value),
+    })
+    );
+  }
+  // Brought this function from ColorBox END
+
   render() {
     return (
       <div className="App">

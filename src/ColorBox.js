@@ -1,29 +1,9 @@
 import React from "react";
 import "./ColorBox.css";
-import HexToHSL from './utils/HexToHSL';
 import HSLToHex from './utils/HSLToHex';
 
 
 class ColorBox extends React.Component {
-  handleHexColorChange = (e) => {
-    e.preventDefault();
-    this.props.colorNumber === 1
-    ? this.setState({
-      hexColor1: e.target.value,
-      hslColor1: HexToHSL(e.target.value),
-    })
-    : (this.props.colorNumber === 2
-    ? this.setState({
-      hexColor2: e.target.value,
-      hslColor2: HexToHSL(e.target.value),
-    })
-    : this.setState({
-      hexColor3: e.target.value,
-      hslColor3: HexToHSL(e.target.value),
-    })
-    );
-  }
-
   handleHSLupdate = (e) => {
     e.preventDefault();
     console.log('Value', e.target.value);

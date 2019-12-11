@@ -5,24 +5,6 @@ import HSLToHex from './utils/HSLToHex';
 
 
 class ColorBox extends React.Component {
-  state = {
-    hexColor1: '#BD10E0',
-    hexColor2: '#4A90E2',
-    hexColor3: '#9B9B9B',
-    hslColor1hue: 290,
-    hslColor1saturation: 87,
-    hslColor1lightness: 47,
-    hslColor1: 'hsl(290, 87%, 47%)',
-    hslColor2hue: 212,
-    hslColor2saturation: 72,
-    hslColor2lightness: 59,
-    hslColor2: 'hsl(212, 72%, 59%)',
-    hslColor3hue: 0,
-    hslColor3saturation: 0,
-    hslColor3lightness: 61,
-    hslColor3: 'hsl(0, 0%, 61%)',
-  }
-
   handleHexColorChange = (e) => {
     e.preventDefault();
     this.props.colorNumber === 1
@@ -89,9 +71,9 @@ class ColorBox extends React.Component {
     )
     )
 
-    const hslColor1 = 'hsl(' + this.state.hslColor1hue + ", " + this.state.hslColor1saturation + '%, ' + this.state.hslColor1lightness + "%)";
-    const hslColor2 = 'hsl(' + this.state.hslColor2hue + ", " + this.state.hslColor2saturation + '%, ' + this.state.hslColor2lightness + "%)";
-    const hslColor3 = 'hsl(' + this.state.hslColor3hue + ", " + this.state.hslColor3saturation + '%, ' + this.state.hslColor3lightness + "%)";
+    const hslColor1 = 'hsl(' + this.props.hslColor1hue + ", " + this.props.hslColor1saturation + '%, ' + this.props.hslColor1lightness + "%)";
+    const hslColor2 = 'hsl(' + this.props.hslColor2hue + ", " + this.props.hslColor2saturation + '%, ' + this.props.hslColor2lightness + "%)";
+    const hslColor3 = 'hsl(' + this.props.hslColor3hue + ", " + this.props.hslColor3saturation + '%, ' + this.props.hslColor3lightness + "%)";
 
     this.setState({
       hslColor1: hslColor1,
@@ -117,22 +99,22 @@ class ColorBox extends React.Component {
 
   render() {
     let displayColor =  this.props.colorNumber === 1
-    ? this.state.hexColor1
+    ? this.props.hexColor1
     : (this.props.colorNumber === 2
-    ? this.state.hexColor2
-    : this.state.hexColor3
+    ? this.props.hexColor2
+    : this.props.hexColor3
     );
 
     
 
     let hslColor = this.props.colorNumber === 1
-    ? this.state.hslColor1
+    ? this.props.hslColor1
     : (this.props.colorNumber === 2
-    ? this.state.hslColor2
-    : this.state.hslColor3
+    ? this.props.hslColor2
+    : this.props.hslColor3
     );
 
-    console.log('HSL Color 1', this.state.hslColor1);
+    console.log('HSL Color 1', this.props.hslColor1);
 
     return (
       <div className="colorBox">
@@ -153,10 +135,10 @@ class ColorBox extends React.Component {
                 step="1"
                 id="hue"
                 value={this.props.colorNumber === 1
-                ? this.state.hslColor1hue
+                ? this.props.hslColor1hue
                 : (this.props.colorNumber === 2
-                ? this.state.hslColor2hue
-                : this.state.hslColor3hue
+                ? this.props.hslColor2hue
+                : this.props.hslColor3hue
                 )}
                 onChange={this.handleHSLupdate}/><br />
           Saturation <input
@@ -165,10 +147,10 @@ class ColorBox extends React.Component {
                       step="1"
                       id="saturation"
                       value={this.props.colorNumber === 1
-                      ? this.state.hslColor1saturation
+                      ? this.props.hslColor1saturation
                       : (this.props.colorNumber === 2
-                      ? this.state.hslColor2saturation
-                      : this.state.hslColor2saturation
+                      ? this.props.hslColor2saturation
+                      : this.props.hslColor2saturation
                       )}
                       onChange={this.handleHSLupdate} /><br />
           Brightness <input
@@ -178,10 +160,10 @@ class ColorBox extends React.Component {
                       step="1"
                       id="brightness"
                       value={this.props.colorNumber === 1
-                      ? this.state.hslColor1lightness
+                      ? this.props.hslColor1lightness
                       : (this.props.colorNumber === 2
-                      ? this.state.hslColor2lightness
-                      : this.state.hslColor3lightness
+                      ? this.props.hslColor2lightness
+                      : this.props.hslColor3lightness
                       )}
                       onChange={this.handleHSLupdate} /><br />
         </div>
@@ -190,10 +172,10 @@ class ColorBox extends React.Component {
           type="text"
           value={
             this.props.colorNumber === 1
-            ? this.state.hexColor1
+            ? this.props.hexColor1
             : (this.props.colorNumber === 2
-            ? this.state.hexColor2
-            : this.state.hexColor3
+            ? this.props.hexColor2
+            : this.props.hexColor3
             )
           }
           onChange={this.handleHexColorChange}

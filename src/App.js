@@ -3,16 +3,18 @@ import ColorBox from './ColorBox';
 import CurrentColorContrast from './CurrentColorContrast';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Color Contrast Calculator</h1>
-      <ColorBox colorNumber={1} />
-      <ColorBox colorNumber={2} />
-      <ColorBox colorNumber={3} />
-      <CurrentColorContrast />
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <h1>Color Contrast Calculator</h1>
+        <ColorBox colorNumber={1} />
+        <ColorBox colorNumber={2} />
+        <ColorBox colorNumber={3} />
+        <CurrentColorContrast />
+      </div>
+    );
+  }
 }
 
 export default App;

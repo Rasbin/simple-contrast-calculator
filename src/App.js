@@ -2,6 +2,7 @@ import React from 'react';
 import ColorBox from './ColorBox';
 import CurrentColorContrast from './CurrentColorContrast';
 import HexToHSL from './utils/HexToHSL';
+import HSLToHex from './utils/HSLToHex';
 import './App.css';
 
 class App extends React.Component {
@@ -41,6 +42,74 @@ class App extends React.Component {
     );
   }
 
+  handleHSLupdate = (colorNumber, hslElement, hslElementValue) => {
+    // Update first box HSL Color
+    colorNumber === 1
+    ? (hslElement === "hue"
+        ? this.setState({
+            hslColor1hue: hslElementValue
+        }) : ((hslElement === "saturation")
+        ? this.setState({
+            hslColor1saturation: hslElementValue
+        })
+        : this.setState({
+            hslColor1lightness: hslElementValue
+        }))
+      )
+    
+    // Update second box HSL color
+    : (colorNumber === 2
+    ? (hslElement === "hue"
+        ? this.setState({
+            hslColor2hue: hslElementValue
+        }) : ((hslElement === "saturation")
+        ? this.setState({
+            hslColor2saturation: hslElementValue
+        })
+        : this.setState({
+            hslColor2lightness: hslElementValue
+        }))
+      )
+
+      // Update third box HSL color
+      : (hslElement === "hue"
+      ? this.setState({
+          hslColor3hue: hslElementValue
+      }) : ((hslElement === "saturation")
+      ? this.setState({
+          hslColor3saturation: hslElementValue
+      })
+      : this.setState({
+          hslColor3lightness: hslElementValue
+      }))
+    )
+    )
+
+    const hslColor1 = 'hsl(' + this.state.hslColor1hue + ", " + this.state.hslColor1saturation + '%, ' + this.state.hslColor1lightness + "%)";
+    const hslColor2 = 'hsl(' + this.state.hslColor2hue + ", " + this.state.hslColor2saturation + '%, ' + this.state.hslColor2lightness + "%)";
+    const hslColor3 = 'hsl(' + this.state.hslColor3hue + ", " + this.state.hslColor3saturation + '%, ' + this.state.hslColor3lightness + "%)";
+
+    this.setState({
+      hslColor1: hslColor1,
+      hslColor2: hslColor2,
+      hslColor3: hslColor3,
+    })
+
+    // Send HSL value to HSLToHexFunction and update HEX value in state
+      colorNumber === 1
+      ? this.setState({
+        hexColor1: HSLToHex(this.state.hslColor1hue, this.state.hslColor1saturation, this.state.hslColor1lightness),
+      })
+      : (colorNumber === 2
+      ? this.setState({
+        hexColor2: HSLToHex(this.state.hslColor2hue, this.state.hslColor2saturation, this.state.hslColor2lightness),
+      })
+      : this.setState({
+        hexColor3: HSLToHex(this.state.hslColor3hue, this.state.hslColor3saturation, this.state.hslColor3lightness),
+      })
+      );
+  }
+
   render() {
     return (
       <div className="App">
@@ -53,6 +122,7 @@ class App extends React.Component {
           hslColor1lightness={this.state.hslColor1lightness}
           hslColor1={this.state.hslColor1}
           parentCallBackHexColorChange={this.handleHexColorChange}
+          parentCallBackHslColorChange={this.handleHSLupdate}
         />
         <ColorBox
           colorNumber={2}
@@ -62,6 +132,7 @@ class App extends React.Component {
           hslColor2lightness={this.state.hslColor2lightness}
           hslColor2={this.state.hslColor2}
           parentCallBackHexColorChange={this.handleHexColorChange}
+          parentCallBackHslColorChange={this.handleHSLupdate}
         />
         <ColorBox
           colorNumber={3}
@@ -71,6 +142,7 @@ class App extends React.Component {
           hslColor3lightness={this.state.hslColor3lightness}
           hslColor3={this.state.hslColor3}
           parentCallBackHexColorChange={this.handleHexColorChange}
+          parentCallBackHslColorChange={this.handleHSLupdate}
         />
         <CurrentColorContrast />
       </div>

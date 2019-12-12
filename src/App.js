@@ -144,7 +144,11 @@ class App extends React.Component {
           parentCallBackHexColorChange={this.handleHexColorChange}
           parentCallBackHslColorChange={this.handleHSLupdate}
         />
-        <CurrentColorContrast />
+        <CurrentColorContrast
+          hexColor1={this.state.hexColor1}
+          hexColor2={this.state.hexColor2}
+          hexColor3={this.state.hexColor3}
+        />
       </div>
     );
   }

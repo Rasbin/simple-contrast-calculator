@@ -6,9 +6,9 @@ class CurrentColorContrast extends React.Component {
     return (
       <div className="currentContrastBox">
         <h2>Current color contrast</h2>
-        <p>Color 1,  Color 2  :  <span>calcContrast(hexColor1, hexColor2)</span></p>
-        <p>Color 1,  Color 3  :  <span>calcContrast(hexColor1, hexColor3)</span></p>
-        <p>Color 2,  Color 3  :  <span>calcContrast(hexColor2, hexColor3)</span></p>
+        <p>Color 1,  Color 2  :  <span>calcContrast(this.props.hexColor1, this.props.hexColor2)</span></p>
+        <p>Color 1,  Color 3  :  <span>calcContrast(this.props.hexColor1, this.props.hexColor3)</span></p>
+        <p>Color 2,  Color 3  :  <span>calcContrast(this.props.hexColor2, this.props.hexColor3)</span></p>
       </div>
     );
   }

@@ -3,12 +3,10 @@ import "./ColorBox.css";
 
 class ColorBox extends React.Component {
   handleHexColorChange = (e) => {
-    e.preventDefault();
     this.props.parentCallBackHexColorChange(this.props.colorNumber, e.target.value);
   }
 
   handleHSLupdate = (e) => {
-    e.preventDefault();
     this.props.parentCallBackHslColorChange(this.props.colorNumber, e.target.id, e.target.value);
   }
 
@@ -20,17 +18,6 @@ class ColorBox extends React.Component {
     : this.props.hexColor3
     );
 
-    
-
-    let hslColor = this.props.colorNumber === 1
-    ? this.props.hslColor1
-    : (this.props.colorNumber === 2
-    ? this.props.hslColor2
-    : this.props.hslColor3
-    );
-
-    console.log('HSL Color 1', this.props.hslColor1);
-
     return (
       <div className="colorBox">
         <h2>Color {this.props.colorNumber}</h2>
@@ -38,9 +25,6 @@ class ColorBox extends React.Component {
           className="displayColor"
           style={{backgroundColor: displayColor}}>
         </div><br />
-        <div>
-          {hslColor}
-        </div>
         <div className="picker">
           <br />
           Hue <input

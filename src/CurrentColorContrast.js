@@ -99,11 +99,11 @@ class CurrentColorContrast extends React.Component {
           <span style={{marginLeft: 15}}>
             { ((color1len === 4 || color1len === 7) && (color3len === 4 || color3len === 7)) ? calcContrast(this.props.hexColor1, this.props.hexColor3) : ''}
           </span>
-          {((color1len === 4 || color1len === 7) && (color2len === 4 || color2len === 7))
+          {((color1len === 4 || color1len === 7) && (color3len === 4 || color3len === 7))
           ? calcContrast(this.props.hexColor1, this.props.hexColor3) >= 3
           ?<span style={{marginLeft: 15}}>&#10003;</span> : <span style={{marginLeft: 15}}>&#10007;</span> : ''}
 
-          {((color1len === 4 || color1len === 7) && (color2len === 4 || color2len === 7))
+          {((color1len === 4 || color1len === 7) && (color3len === 4 || color3len === 7))
           ? calcContrast(this.props.hexColor1, this.props.hexColor3) >= 4.5
           ? <span style={{marginLeft: 15}}>&#10003;</span> : <span style={{marginLeft: 15}}>&#10007;</span> : ''}
 
@@ -112,11 +112,11 @@ class CurrentColorContrast extends React.Component {
           <span style={{marginLeft: 15}}>
             { ((color2len === 4 || color2len === 7) && (color3len === 4 || color3len === 7)) ? calcContrast(this.props.hexColor2, this.props.hexColor3) : ''}
           </span>
-          {((color1len === 4 || color1len === 7) && (color2len === 4 || color2len === 7))
+          {((color2len === 4 || color2len === 7) && (color3len === 4 || color3len === 7))
           ? calcContrast(this.props.hexColor2, this.props.hexColor3) >= 3
           ?<span style={{marginLeft: 15}}>&#10003;</span> : <span style={{marginLeft: 15}}>&#10007;</span> : ''}
 
-          {((color1len === 4 || color1len === 7) && (color2len === 4 || color2len === 7))
+          {((color2len === 4 || color2len === 7) && (color3len === 4 || color3len === 7))
           ? calcContrast(this.props.hexColor2, this.props.hexColor3) >= 4.5
           ? <span style={{marginLeft: 15}}>&#10003;</span> : <span style={{marginLeft: 15}}>&#10007;</span> : ''}
 

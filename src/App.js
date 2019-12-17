@@ -25,6 +25,7 @@ class App extends React.Component {
     selectedContrastRation12: 0,
     selectedContrastRation13: 0,
     selectedContrastRation23: 0,
+    colorsToChange: '',
   }
 
   handleHexColorChange = (colorNumber, hexColorValue) => {

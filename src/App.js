@@ -22,6 +22,9 @@ class App extends React.Component {
     hslColor3saturation: 0,
     hslColor3lightness: 61,
     hslColor3: 'hsl(0, 0%, 61%)',
+    selectedContrastRation12: 0,
+    selectedContrastRation13: 0,
+    selectedContrastRation23: 0,
   }
 
   handleHexColorChange = (colorNumber, hexColorValue) => {

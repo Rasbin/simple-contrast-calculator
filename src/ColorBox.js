@@ -24,7 +24,7 @@ class ColorBox extends React.Component {
         <div
           className="displayColor"
           style={{backgroundColor: displayColor}}>
-        </div><br />
+        </div>
         <div className="picker">
           <br />
           Hue <input
@@ -39,7 +39,16 @@ class ColorBox extends React.Component {
                 ? this.props.hslColor2hue
                 : this.props.hslColor3hue
                 )}
-                onChange={this.handleHSLupdate}/><br />
+                onChange={this.handleHSLupdate}/>
+                {this.props.colorNumber === 1
+                  ? this.props.hslColor1hue
+                  : this.props.colorNumber === 2
+                  ? this.props.hslColor2hue
+                  : this.props.colorNumber === 3
+                  ? this.props.hslColor3hue
+                  : ''
+                }
+                <br />
           Saturation <input
                       type="range"
                       min="0" max="100"
@@ -49,9 +58,18 @@ class ColorBox extends React.Component {
                       ? this.props.hslColor1saturation
                       : (this.props.colorNumber === 2
                       ? this.props.hslColor2saturation
-                      : this.props.hslColor2saturation
+                      : this.props.hslColor3saturation
                       )}
-                      onChange={this.handleHSLupdate} /><br />
+                      onChange={this.handleHSLupdate} />
+                      {this.props.colorNumber === 1
+                        ? this.props.hslColor1saturation
+                        : this.props.colorNumber === 2
+                        ? this.props.hslColor2saturation
+                        : this.props.colorNumber === 3
+                        ? this.props.hslColor3saturation
+                        : ''
+                      }
+                <br />
           Brightness <input
                       type="range"
                       min="0"
@@ -64,7 +82,16 @@ class ColorBox extends React.Component {
                       ? this.props.hslColor2lightness
                       : this.props.hslColor3lightness
                       )}
-                      onChange={this.handleHSLupdate} /><br />
+                      onChange={this.handleHSLupdate} />
+                      {this.props.colorNumber === 1
+                        ? this.props.hslColor1lightness
+                        : this.props.colorNumber === 2
+                        ? this.props.hslColor2lightness
+                        : this.props.colorNumber === 3
+                        ? this.props.hslColor3lightness
+                        : ''
+                      }
+                      <br />
         </div>
         <span>Hex </span>
         <input

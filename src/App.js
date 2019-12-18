@@ -33,15 +33,25 @@ class App extends React.Component {
     ? this.setState({
       hexColor1: hexColorValue,
       hslColor1: HexToHSL(hexColorValue),
+      hslColor1hue: HexToHSL(hexColorValue).split(',')[0].split('(')[1],
+      hslColor1saturation: HexToHSL(hexColorValue).split(',')[1].split('%')[0],
+      hslColor1lightness: HexToHSL(hexColorValue).split(',')[2].split('%')[0]
+
     })
     : (colorNumber === 2
     ? this.setState({
       hexColor2: hexColorValue,
       hslColor2: HexToHSL(hexColorValue),
+      hslColor2hue: HexToHSL(hexColorValue).split(',')[0].split('(')[1],
+      hslColor2saturation: HexToHSL(hexColorValue).split(',')[1].split('%')[0],
+      hslColor2lightness: HexToHSL(hexColorValue).split(',')[2].split('%')[0]
     })
     : this.setState({
       hexColor3: hexColorValue,
       hslColor3: HexToHSL(hexColorValue),
+      hslColor3hue: HexToHSL(hexColorValue).split(',')[0].split('(')[1],
+      hslColor3saturation: HexToHSL(hexColorValue).split(',')[1].split('%')[0],
+      hslColor3lightness: HexToHSL(hexColorValue).split(',')[2].split('%')[0]
     })
     );
   }
@@ -109,6 +119,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('HUE VALUE TEST ', this.state.test);
     return (
       <div className="App">
         <h1>Color Contrast Calculator</h1>

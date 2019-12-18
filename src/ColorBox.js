@@ -23,7 +23,8 @@ class ColorBox extends React.Component {
         <h2>Color {this.props.colorNumber}</h2>
         <div
           className="displayColor"
-          style={{backgroundColor: displayColor}}>
+          style={{backgroundColor: displayColor, border: '2px solid grey', borderRadius: 5}}
+        >
         </div>
         <div className="picker">
           <br />

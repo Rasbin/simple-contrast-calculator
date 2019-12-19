@@ -41,14 +41,16 @@ class ColorBox extends React.Component {
                 : this.props.hslColor3hue
                 )}
                 onChange={this.handleHSLupdate}/>
-                {this.props.colorNumber === 1
-                  ? this.props.hslColor1hue
-                  : this.props.colorNumber === 2
-                  ? this.props.hslColor2hue
-                  : this.props.colorNumber === 3
-                  ? this.props.hslColor3hue
-                  : ''
-                }
+                <span style={{marginLeft: 10}}>
+                  {this.props.colorNumber === 1
+                    ? this.props.hslColor1hue
+                    : this.props.colorNumber === 2
+                    ? this.props.hslColor2hue
+                    : this.props.colorNumber === 3
+                    ? this.props.hslColor3hue
+                    : ''
+                  }
+                </span>
                 <br />
           Saturation <input
                       type="range"
@@ -62,14 +64,16 @@ class ColorBox extends React.Component {
                       : this.props.hslColor3saturation
                       )}
                       onChange={this.handleHSLupdate} />
-                      {this.props.colorNumber === 1
-                        ? this.props.hslColor1saturation
-                        : this.props.colorNumber === 2
-                        ? this.props.hslColor2saturation
-                        : this.props.colorNumber === 3
-                        ? this.props.hslColor3saturation
-                        : ''
-                      }
+                      <span style={{marginLeft: 10}}>
+                        {this.props.colorNumber === 1
+                          ? this.props.hslColor1saturation
+                          : this.props.colorNumber === 2
+                          ? this.props.hslColor2saturation
+                          : this.props.colorNumber === 3
+                          ? this.props.hslColor3saturation
+                          : ''
+                        }
+                      </span>
                 <br />
           Brightness <input
                       type="range"
@@ -84,14 +88,16 @@ class ColorBox extends React.Component {
                       : this.props.hslColor3lightness
                       )}
                       onChange={this.handleHSLupdate} />
-                      {this.props.colorNumber === 1
-                        ? this.props.hslColor1lightness
-                        : this.props.colorNumber === 2
-                        ? this.props.hslColor2lightness
-                        : this.props.colorNumber === 3
-                        ? this.props.hslColor3lightness
-                        : ''
-                      }
+                      <span style={{marginLeft: 10}}>
+                        {this.props.colorNumber === 1
+                          ? this.props.hslColor1lightness
+                          : this.props.colorNumber === 2
+                          ? this.props.hslColor2lightness
+                          : this.props.colorNumber === 3
+                          ? this.props.hslColor3lightness
+                          : ''
+                        }
+                      </span>
                       <br />
         </div>
         <span>Hex </span>

@@ -144,7 +144,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('Colors to change ', this.state.colorsToChange);
     return (
       <div className="App">
         <h1>Color Contrast Calculator</h1>

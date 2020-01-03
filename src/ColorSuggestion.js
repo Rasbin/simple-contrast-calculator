@@ -21,8 +21,6 @@ class ColorSuggestion extends React.Component {
 
   render() {
     console.log('Contrast Ratio 12 ', this.props.selectedContrastRatio12);
-    console.log('Contrast Ratio 13 ', this.props.selectedContrastRatio13);
-    console.log('Contrast Ratio 23 ', this.props.selectedContrastRatio23);
 
     return (
       <div>
@@ -31,12 +29,12 @@ class ColorSuggestion extends React.Component {
         <h3>Required color contrasts</h3>
         <div>
           <p>
-            Color 1, Color 2
+            Color 1,  Color 2
             <input type="radio" name="contrastRatio12" value={3} onClick={this.handleContrastRatio12}/> 3 
             <input type="radio" name="contrastRatio12" value={4.5} onClick={this.handleContrastRatio12}/> 4.5 
             <input type="radio" name="contrastRatio12" value={0} onClick={this.handleContrastRatio12}/> Doesn't matter
           </p>
-          <p>
+          {/* <p>
             Color 1, Color 3
             <input type="radio" name="contrastRatio13" value={3} onClick={this.handleContrastRatio13}/> 3 
             <input type="radio" name="contrastRatio13" value={4.5} onClick={this.handleContrastRatio13}/> 4.5 
@@ -47,9 +45,9 @@ class ColorSuggestion extends React.Component {
             <input type="radio" name="contrastRatio23" value={3} onClick={this.handleContrastRatio23}/> 3 
             <input type="radio" name="contrastRatio23" value={4.5} onClick={this.handleContrastRatio23}/> 4.5 
             <input type="radio" name="contrastRatio23" value={0} onClick={this.handleContrastRatio23}/> Doesn't matter 
-          </p>
+          </p> */}
           <br />
-          <h3>What colors to change?</h3>
+          {/* <h3>What colors to change?</h3>
           <select onChange={this.handleColorsToChange}>
             <option>Select color</option>
             <option value={1}>Color 1</option>
@@ -59,6 +57,9 @@ class ColorSuggestion extends React.Component {
             <option value={13}>Color 1 and 3</option>
             <option value={23}>Color 2 and 3</option>
           </select>
+          <br />
+          <br /> */}
+          <input type="submit" value="Find colors"/>
         </div>
       </div>
     );

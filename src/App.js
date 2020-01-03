@@ -1,5 +1,6 @@
 import React from 'react';
 import ColorBox from './ColorBox';
+import ColorSuggestion from './ColorSuggestion';
 import CurrentColorContrast from './CurrentColorContrast';
 import HexToHSL from './utils/HexToHSL';
 import HSLToHex from './utils/HSLToHex';
@@ -22,9 +23,9 @@ class App extends React.Component {
     hslColor3saturation: 0,
     hslColor3lightness: 0,
     hslColor3: 'hsl(0, 0%, 0%)',
-    selectedContrastRation12: 0,
-    selectedContrastRation13: 0,
-    selectedContrastRation23: 0,
+    selectedContrastRatio12: 0,
+    selectedContrastRatio13: 0,
+    selectedContrastRatio23: 0,
     colorsToChange: '',
   }
 
@@ -119,7 +120,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('HUE VALUE TEST ', this.state.test);
     return (
       <div className="App">
         <h1>Color Contrast Calculator</h1>
@@ -157,6 +157,11 @@ class App extends React.Component {
           hexColor1={this.state.hexColor1}
           hexColor2={this.state.hexColor2}
           hexColor3={this.state.hexColor3}
+        />
+        <ColorSuggestion
+          selectedContrastRatio12={this.state.selectedContrastRatio12}
+          selectedContrastRatio13={this.state.selectedContrastRatio13}
+          selectedContrastRatio23={this.state.selectedContrastRatio23}
         />
       </div>
     );

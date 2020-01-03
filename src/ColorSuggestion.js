@@ -14,6 +14,11 @@ class ColorSuggestion extends React.Component {
     this.props.parentCallBackUpdateCR23(e.target.value);
   }
 
+  handleColorsToChange = (e) => {
+    console.log('Check value of target ', e.target.value);
+    this.props.parentCallBackUpdateColorsToChange(e.target.value);
+  }
+
   render() {
     console.log('Contrast Ratio 12 ', this.props.selectedContrastRatio12);
     console.log('Contrast Ratio 13 ', this.props.selectedContrastRatio13);
@@ -43,6 +48,17 @@ class ColorSuggestion extends React.Component {
             <input type="radio" name="contrastRatio23" value={4.5} onClick={this.handleContrastRatio23}/> 4.5 
             <input type="radio" name="contrastRatio23" value={0} onClick={this.handleContrastRatio23}/> Doesn't matter 
           </p>
+          <br />
+          <h3>What colors to change?</h3>
+          <select onChange={this.handleColorsToChange}>
+            <option>Select color</option>
+            <option value={1}>Color 1</option>
+            <option value={2}>Color 2</option>
+            <option value={3}>Color 3</option>
+            <option value={12}>Color 1 and 2</option>
+            <option value={13}>Color 1 and 3</option>
+            <option value={23}>Color 2 and 3</option>
+          </select>
         </div>
       </div>
     );

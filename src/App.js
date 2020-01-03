@@ -26,7 +26,7 @@ class App extends React.Component {
     selectedContrastRatio12: 0,
     selectedContrastRatio13: 0,
     selectedContrastRatio23: 0,
-    colorsToChange: '',
+    colorsToChange: 0,
   }
 
   handleHexColorChange = (colorNumber, hexColorValue) => {
@@ -137,7 +137,14 @@ class App extends React.Component {
     })
   }
 
+  handleUpdateColorsToChange = colorsToChange => {
+    this.setState({
+      colorsToChange: colorsToChange
+    })
+  }
+
   render() {
+    console.log('Colors to change ', this.state.colorsToChange);
     return (
       <div className="App">
         <h1>Color Contrast Calculator</h1>
@@ -183,7 +190,7 @@ class App extends React.Component {
           parentCallBackUpdateCR13={this.handleUpdateCR13}
           selectedContrastRatio23={this.state.selectedContrastRatio23}
           parentCallBackUpdateCR23={this.handleUpdateCR23}
-
+          parentCallBackUpdateColorsToChange={this.handleUpdateColorsToChange}
         />
       </div>
     );

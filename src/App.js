@@ -119,6 +119,24 @@ class App extends React.Component {
     )
   }
 
+  handleUpdateCR12 = colorRatio12 => {
+    this.setState({
+      selectedContrastRatio12: colorRatio12
+    })
+  }
+
+  handleUpdateCR13 = colorRatio13 => {
+    this.setState({
+      selectedContrastRatio13: colorRatio13
+    })
+  }
+
+  handleUpdateCR23 = colorRatio23 => {
+    this.setState({
+      selectedContrastRatio23: colorRatio23
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -160,8 +178,12 @@ class App extends React.Component {
         />
         <ColorSuggestion
           selectedContrastRatio12={this.state.selectedContrastRatio12}
+          parentCallBackUpdateCR12={this.handleUpdateCR12}
           selectedContrastRatio13={this.state.selectedContrastRatio13}
+          parentCallBackUpdateCR13={this.handleUpdateCR13}
           selectedContrastRatio23={this.state.selectedContrastRatio23}
+          parentCallBackUpdateCR23={this.handleUpdateCR23}
+
         />
       </div>
     );

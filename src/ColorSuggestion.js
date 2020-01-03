@@ -2,7 +2,23 @@ import React from 'react';
 import "./ColorSuggestion.css";
 
 class ColorSuggestion extends React.Component {
+  handleContrastRatio12 = (e) => {
+    this.props.parentCallBackUpdateCR12(e.target.value);
+  }
+
+  handleContrastRatio13 = (e) => {
+    this.props.parentCallBackUpdateCR13(e.target.value);
+  }
+
+  handleContrastRatio23 = (e) => {
+    this.props.parentCallBackUpdateCR23(e.target.value);
+  }
+
   render() {
+    console.log('Contrast Ratio 12 ', this.props.selectedContrastRatio12);
+    console.log('Contrast Ratio 13 ', this.props.selectedContrastRatio13);
+    console.log('Contrast Ratio 23 ', this.props.selectedContrastRatio23);
+
     return (
       <div>
         <br />
@@ -11,22 +27,21 @@ class ColorSuggestion extends React.Component {
         <div>
           <p>
             Color 1, Color 2
-            <input type="radio" name="contrastRatio12" value={3} /> 3 
-            <input type="radio" name="contrastRatio12" value={4.5}/> 4.5 
-            <input type="radio" name="contrastRatio12" value={0}/> Doesn't matter 
-
+            <input type="radio" name="contrastRatio12" value={3} onClick={this.handleContrastRatio12}/> 3 
+            <input type="radio" name="contrastRatio12" value={4.5} onClick={this.handleContrastRatio12}/> 4.5 
+            <input type="radio" name="contrastRatio12" value={0} onClick={this.handleContrastRatio12}/> Doesn't matter
           </p>
           <p>
             Color 1, Color 3
-            <input type="radio" name="contrastRatio13" value={3}/> 3 
-            <input type="radio" name="contrastRatio13" value={4.5}/> 4.5 
-            <input type="radio" name="contrastRatio23" value={0}/> Doesn't matter
+            <input type="radio" name="contrastRatio13" value={3} onClick={this.handleContrastRatio13}/> 3 
+            <input type="radio" name="contrastRatio13" value={4.5} onClick={this.handleContrastRatio13}/> 4.5 
+            <input type="radio" name="contrastRatio23" value={0} onClick={this.handleContrastRatio23}/> Doesn't matter
           </p>
           <p>
             Color 2, Color 3
-            <input type="radio" name="contrastRatio23" value={3}/> 3 
-            <input type="radio" name="contrastRatio23" value={4.5}/> 4.5 
-            <input type="radio" name="contrastRatio23" value={0}/> Doesn't matter 
+            <input type="radio" name="contrastRatio23" value={3} onClick={this.handleContrastRatio23}/> 3 
+            <input type="radio" name="contrastRatio23" value={4.5} onClick={this.handleContrastRatio23}/> 4.5 
+            <input type="radio" name="contrastRatio23" value={0} onClick={this.handleContrastRatio23}/> Doesn't matter 
           </p>
         </div>
       </div>

@@ -29,6 +29,9 @@ class App extends React.Component {
     selectedContrastRatio23: 0,
     colorsToChange: 0,
     findColors: 'untouched',
+    cr12status: 'untouched',
+    cr13status: 'untouched',
+    cr23status: 'untouched',
   }
 
   handleFindColors = () => {
@@ -129,19 +132,22 @@ class App extends React.Component {
 
   handleUpdateCR12 = colorRatio12 => {
     this.setState({
-      selectedContrastRatio12: colorRatio12
+      selectedContrastRatio12: colorRatio12,
+      cr12status: 'touched',
     })
   }
 
   handleUpdateCR13 = colorRatio13 => {
     this.setState({
-      selectedContrastRatio13: colorRatio13
+      selectedContrastRatio13: colorRatio13,
+      cr13status: 'touched',
     })
   }
 
   handleUpdateCR23 = colorRatio23 => {
     this.setState({
-      selectedContrastRatio23: colorRatio23
+      selectedContrastRatio23: colorRatio23,
+      cr23status: 'touched',
     })
   }
 
@@ -154,6 +160,9 @@ class App extends React.Component {
   render() {
     console.log('Colors to change ', this.state.colorsToChange);
     console.log('Find Colors Click Status : ', this.state.findColors);
+    console.log('CR12 status : ', this.state.cr12status);
+    console.log('CR13 status : ', this.state.cr13status);
+    console.log('CR23 status : ', this.state.cr23status);
 
     const newTextColor =
     findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, this.state.selectedContrastRatio12);
@@ -168,6 +177,87 @@ class App extends React.Component {
     const newTextColor23 = findClosestAccessibleColor(this.state.hexColor2, this.state.hexColor3, this.state.selectedContrastRatio23);
     const newBackgroundColor23 =
     findClosestAccessibleColor(this.state.hexColor3, this.state.hexColor2, this.state.selectedContrastRatio23);
+
+    const colorResult = 
+    <div className="mainColorResultContainer">
+          <div className="12changeColor1">
+            <p>Color 12 : If you change Color 1 to : {newTextColor}, your CR is good enough.</p>
+            <div
+              style={{display: 'inline-block', backgroundColor: newTextColor, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+            <div
+              style={{display: 'inline-block', backgroundColor: this.state.hexColor2, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+            <div
+              style={{display: 'inline-block', backgroundColor: this.state.hexColor3, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+          </div>
+
+          <div className="12changeColor2">
+            <p>Color 12 : If you change background color to : {newBackgroundColor}, your CR is good enough.</p>
+            <div
+              style={{display: 'inline-block', backgroundColor: this.state.hexColor1, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+            <div
+              style={{display: 'inline-block', backgroundColor: newBackgroundColor, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+            <div
+              style={{display: 'inline-block', backgroundColor: this.state.hexColor3, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+          </div>
+
+          {/* <div className="13changeColor1">
+            <p>Color 13 : If you change text color to : {newTextColor13}, your CR is good enough.</p>
+            <div
+              style={{display: 'inline-block', backgroundColor: newTextColor13, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+            <div
+              style={{display: 'inline-block', backgroundColor: this.state.hexColor2, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+            <div
+              style={{display: 'inline-block', backgroundColor: this.state.hexColor3, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+          </div>
+
+          <div className="13changeColor2">
+            <p>Color 13 : If you change background color to : {newBackgroundColor13}, your CR is good enough.</p>
+            <div
+              style={{display: 'inline-block', backgroundColor: this.state.hexColor1, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+            <div
+              style={{display: 'inline-block', backgroundColor: this.state.hexColor2, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+            <div
+              style={{display: 'inline-block', backgroundColor: newBackgroundColor, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+          </div>
+
+          <div className="23changeColor1">
+            <p>Color 23 : If you change text color to : {newTextColor23}, your CR is good enough.</p>
+            <div
+              style={{display: 'inline-block', backgroundColor: this.state.hexColor1, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+            <div
+              style={{display: 'inline-block', backgroundColor: newTextColor23, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+            <div
+              style={{display: 'inline-block', backgroundColor: this.state.hexColor3, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+          </div>
+
+          <div className="23changeColor2">
+            <p>Color 23 : If you change background color to : {newBackgroundColor23}, your CR is good enough.</p>
+            <div
+              style={{display: 'inline-block', backgroundColor: this.state.hexColor1, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+            <div
+              style={{display: 'inline-block', backgroundColor: this.state.hexColor2, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+            <div
+              style={{display: 'inline-block', backgroundColor: newBackgroundColor23, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
+            ></div>
+          </div> */}
+        </div>
 
     return (
       <div className="App">
@@ -218,84 +308,8 @@ class App extends React.Component {
           parentCallBackFindColors={this.handleFindColors}
         />
         <br />
-        <div className="12changeColor1">
-          <p>Color 12 : If you change text color to : {newTextColor}, your CR is good enough.</p>
-          <div
-            style={{display: 'inline-block', backgroundColor: newTextColor, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-          <div
-            style={{display: 'inline-block', backgroundColor: this.state.hexColor2, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-          <div
-            style={{display: 'inline-block', backgroundColor: this.state.hexColor3, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-        </div>
-
-        <div className="12changeColor2">
-          <p>Color 12 : If you change background color to : {newBackgroundColor}, your CR is good enough.</p>
-          <div
-            style={{display: 'inline-block', backgroundColor: this.state.hexColor1, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-          <div
-            style={{display: 'inline-block', backgroundColor: newBackgroundColor, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-          <div
-            style={{display: 'inline-block', backgroundColor: this.state.hexColor3, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-        </div>
-
-        <div className="13changeColor1">
-          <p>Color 13 : If you change text color to : {newTextColor13}, your CR is good enough.</p>
-          <div
-            style={{display: 'inline-block', backgroundColor: newTextColor13, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-          <div
-            style={{display: 'inline-block', backgroundColor: this.state.hexColor2, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-          <div
-            style={{display: 'inline-block', backgroundColor: this.state.hexColor3, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-        </div>
-
-        <div className="13changeColor2">
-          <p>Color 13 : If you change background color to : {newBackgroundColor13}, your CR is good enough.</p>
-          <div
-            style={{display: 'inline-block', backgroundColor: this.state.hexColor1, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-          <div
-            style={{display: 'inline-block', backgroundColor: this.state.hexColor2, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-          <div
-            style={{display: 'inline-block', backgroundColor: newBackgroundColor, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-        </div>
-
-        <div className="23changeColor1">
-          <p>Color 23 : If you change text color to : {newTextColor23}, your CR is good enough.</p>
-          <div
-            style={{display: 'inline-block', backgroundColor: this.state.hexColor1, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-          <div
-            style={{display: 'inline-block', backgroundColor: newTextColor23, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-          <div
-            style={{display: 'inline-block', backgroundColor: this.state.hexColor3, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-        </div>
-
-        <div className="23changeColor2">
-          <p>Color 23 : If you change background color to : {newBackgroundColor23}, your CR is good enough.</p>
-          <div
-            style={{display: 'inline-block', backgroundColor: this.state.hexColor1, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-          <div
-            style={{display: 'inline-block', backgroundColor: this.state.hexColor2, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-          <div
-            style={{display: 'inline-block', backgroundColor: newBackgroundColor23, height: '50px', width: '250px', border: '2px solid grey', borderRadius: 5}}
-          ></div>
-        </div>
-
+        
+        {this.state.findColors === 'touched' && this.state.cr12status === 'touched' && colorResult}
       </div>
     );
   }

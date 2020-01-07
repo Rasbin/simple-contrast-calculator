@@ -4,6 +4,7 @@ import ColorSuggestion from './ColorSuggestion';
 import CurrentColorContrast from './CurrentColorContrast';
 import HexToHSL from './utils/HexToHSL';
 import HSLToHex from './utils/HSLToHex';
+import findClosestAccessibleColor from './utils/color';
 import './App.css';
 
 class App extends React.Component {
@@ -144,6 +145,11 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('Colors to change ', this.state.colorsToChange);
+
+    const newTextColor =
+    findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, this.state.selectedContrastRatio12);
+
     return (
       <div className="App">
         <h1>Color Contrast Calculator</h1>
@@ -191,6 +197,9 @@ class App extends React.Component {
           parentCallBackUpdateCR23={this.handleUpdateCR23}
           parentCallBackUpdateColorsToChange={this.handleUpdateColorsToChange}
         />
+        <div>
+          Color 12 : If you change text color to : {newTextColor}, your CR is good enough.
+        </div>
       </div>
     );
   }

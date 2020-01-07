@@ -15,8 +15,7 @@ class ColorSuggestion extends React.Component {
   }
 
   handleColorsToChange = (e) => {
-    console.log('Check value of target ', e.target.value);
-    this.props.parentCallBackUpdateColorsToChange(e.target.value);
+    this.props.parentCallBackUpdateColorsToChange(12);
   }
 
   render() {
@@ -59,7 +58,7 @@ class ColorSuggestion extends React.Component {
           </select>
           <br />
           <br /> */}
-          <input type="submit" value="Find colors"/>
+          <input type="submit" onClick={this.handleColorsToChange} value="Find colors"/>
         </div>
       </div>
     );

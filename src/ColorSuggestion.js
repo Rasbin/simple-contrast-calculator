@@ -19,7 +19,7 @@ class ColorSuggestion extends React.Component {
   }
 
   handleColorsToChange = (e) => {
-    this.props.parentCallBackUpdateColorsToChange(12);
+    this.props.parentCallBackUpdateColorsToChange(e.target.value);
   }
 
   render() {
@@ -41,7 +41,7 @@ class ColorSuggestion extends React.Component {
             Color 1, Color 3
             <input type="radio" name="contrastRatio13" value={3} onClick={this.handleContrastRatio13}/> 3 
             <input type="radio" name="contrastRatio13" value={4.5} onClick={this.handleContrastRatio13}/> 4.5 
-            <input type="radio" name="contrastRatio23" value={0} onClick={this.handleContrastRatio13}/> Doesn't matter
+            <input type="radio" name="contrastRatio13" value={0} onClick={this.handleContrastRatio13}/> Doesn't matter
           </p>
           <p>
             Color 2, Color 3
@@ -62,7 +62,7 @@ class ColorSuggestion extends React.Component {
           </select>
           <br />
           <br />
-          <input type="submit" onClick={this.handleFindColors} value="Find colors"/>
+          <input type="submit" onClick={()=>this.props.parentCallBackFindColors()} value="Find colors"/>
         </div>
       </div>
     );

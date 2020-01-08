@@ -216,8 +216,8 @@ class App extends React.Component {
               ? '13'
               : ''
     console.log('Touched Text is ', touchedText);
-    // const newBackgroundColor =
-    // findClosestAccessibleColor(this.state.hexColor2, this.state.hexColor1, this.state.selectedContrastRatio12);
+    const newBackgroundColor12 =
+    findClosestAccessibleColor(this.state.hexColor2, this.state.hexColor1, this.state.selectedContrastRatio12);
 
     const newTextColor13 = findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor3, this.state.selectedContrastRatio13);
     const newBackgroundColor13 =
@@ -250,6 +250,49 @@ class App extends React.Component {
             style={{
               display: "inline-block",
               backgroundColor: this.state.hexColor2,
+              height: "50px",
+              width: "250px",
+              border: "2px solid grey",
+              borderRadius: 5
+            }}
+          ></div>
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: this.state.hexColor3,
+              height: "50px",
+              width: "250px",
+              border: "2px solid grey",
+              borderRadius: 5
+            }}
+          ></div>
+        </div>
+      </div>
+    );
+
+    const backColorResult12 = (
+      <div className="mainColorResultContainer">
+        <div className="12changeColor1">
+          <p>
+            If you change Color 2 to : {newBackgroundColor12}, your CR is
+            good enough.
+          </p>
+          <br />
+
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: this.state.hexColor1,
+              height: "50px",
+              width: "250px",
+              border: "2px solid grey",
+              borderRadius: 5
+            }}
+          ></div>
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: newBackgroundColor12,
               height: "50px",
               width: "250px",
               border: "2px solid grey",
@@ -313,6 +356,49 @@ class App extends React.Component {
       </div>
     );
 
+    const backColorResult13 = (
+      <div className="mainColorResultContainer">
+        <div className="13changeColor1">
+          <p>
+            If you change Color 3 to : {newBackgroundColor13}, your CR is
+            good enough.
+          </p>
+          <br />
+
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: this.state.hexColor1,
+              height: "50px",
+              width: "250px",
+              border: "2px solid grey",
+              borderRadius: 5
+            }}
+          ></div>
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: this.state.hexColor2,
+              height: "50px",
+              width: "250px",
+              border: "2px solid grey",
+              borderRadius: 5
+            }}
+          ></div>
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: newBackgroundColor13,
+              height: "50px",
+              width: "250px",
+              border: "2px solid grey",
+              borderRadius: 5
+            }}
+          ></div>
+        </div>
+      </div>
+    );
+
     const colorResult23 = (
       <div className="mainColorResultContainer">
         <div className="13changeColor1">
@@ -346,6 +432,49 @@ class App extends React.Component {
             style={{
               display: "inline-block",
               backgroundColor: this.state.hexColor3,
+              height: "50px",
+              width: "250px",
+              border: "2px solid grey",
+              borderRadius: 5
+            }}
+          ></div>
+        </div>
+      </div>
+    );
+
+    const backColorResult23 = (
+      <div className="mainColorResultContainer">
+        <div className="13changeColor1">
+          <p>
+            If you change Color 3 to : {newBackgroundColor23}, your CR is
+            good enough.
+          </p>
+          <br />
+
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: this.state.hexColor1,
+              height: "50px",
+              width: "250px",
+              border: "2px solid grey",
+              borderRadius: 5
+            }}
+          ></div>
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: this.state.hexColor2,
+              height: "50px",
+              width: "250px",
+              border: "2px solid grey",
+              borderRadius: 5
+            }}
+          ></div>
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: newBackgroundColor23,
               height: "50px",
               width: "250px",
               border: "2px solid grey",
@@ -412,7 +541,17 @@ class App extends React.Component {
         this.state.findColors === 'touched' && 
         this.state.selectedContrastRatio12 > 0 &&
         this.state.selectedContrastRatio13 < 1 &&
-        this.state.selectedContrastRatio23 < 1 && colorResult12}
+        this.state.selectedContrastRatio23 < 1 &&
+        this.state.colorsToChange == 1 && colorResult12}
+
+        {this.state.cr12status === 'touched' &&
+        this.state.cr13status === 'touched' &&
+        this.state.cr23status === 'touched' &&
+        this.state.findColors === 'touched' && 
+        this.state.selectedContrastRatio12 > 0 &&
+        this.state.selectedContrastRatio13 < 1 &&
+        this.state.selectedContrastRatio23 < 1 &&
+        this.state.colorsToChange == 2 && backColorResult12}
 
         {this.state.cr12status === 'touched' &&
         this.state.cr13status === 'touched' &&
@@ -420,7 +559,17 @@ class App extends React.Component {
         this.state.findColors === 'touched' && 
         this.state.selectedContrastRatio13 > 0 &&
         this.state.selectedContrastRatio12 < 1 &&
-        this.state.selectedContrastRatio23 < 1 && colorResult13}
+        this.state.selectedContrastRatio23 < 1 &&
+        this.state.colorsToChange == 1 && colorResult13}
+
+        {this.state.cr12status === 'touched' &&
+        this.state.cr13status === 'touched' &&
+        this.state.cr23status === 'touched' &&
+        this.state.findColors === 'touched' && 
+        this.state.selectedContrastRatio13 > 0 &&
+        this.state.selectedContrastRatio12 < 1 &&
+        this.state.selectedContrastRatio23 < 1 &&
+        this.state.colorsToChange == 3 && backColorResult13}
 
         {this.state.cr12status === 'touched' &&
         this.state.cr13status === 'touched' &&
@@ -428,7 +577,17 @@ class App extends React.Component {
         this.state.findColors === 'touched' && 
         this.state.selectedContrastRatio23 > 0 &&
         this.state.selectedContrastRatio12 < 1 &&
-        this.state.selectedContrastRatio13 < 1 && colorResult23}
+        this.state.selectedContrastRatio13 < 1 &&
+        this.state.colorsToChange == 2 && colorResult23}
+
+        {this.state.cr12status === 'touched' &&
+        this.state.cr13status === 'touched' &&
+        this.state.cr23status === 'touched' &&
+        this.state.findColors === 'touched' && 
+        this.state.selectedContrastRatio23 > 0 &&
+        this.state.selectedContrastRatio12 < 1 &&
+        this.state.selectedContrastRatio13 < 1 &&
+        this.state.colorsToChange == 3 && backColorResult23}
       </div>
     );
   }

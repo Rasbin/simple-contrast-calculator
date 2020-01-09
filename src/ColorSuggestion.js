@@ -54,9 +54,9 @@ class ColorSuggestion extends React.Component {
             <option value={1}>Color 1</option>
             <option value={2}>Color 2</option>
             <option value={3}>Color 3</option>
-            <option value={12}>Color 1 and 2</option>
+            {/* <option value={12}>Color 1 and 2</option>
             <option value={13}>Color 1 and 3</option>
-            <option value={23}>Color 2 and 3</option>
+            <option value={23}>Color 2 and 3</option> */}
           </select>
           <br />
           <br />

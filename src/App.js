@@ -41,37 +41,31 @@ class App extends React.Component {
 
   handleFindColors = () => {
     this.setState({
-      findColors: 'touched'
-    })
-    const hexColor1And2 = findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, this.state.selectedContrastRatio12)
-    const hexColor1And3 = findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor3, this.state.selectedContrastRatio13)
-    const hexColor2And3 = findClosestAccessibleColor(this.state.hexColor2, this.state.hexColor3, this.state.selectedContrastRatio23)
-
-    this.setState({
       findColors: 'touched',
-      hexColor1And2: hexColor1And2,
-      hexColor1And3: hexColor1And3,
-      hexColor2And3: hexColor2And3,
-    });
-    console.log('this.state.colorsToChange ', this.state.colorsToChange)
+    })
+    // const hexColor1And2 = findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, this.state.selectedContrastRatio12)
+    // const hexColor1And3 = findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor3, this.state.selectedContrastRatio13)
+    // const hexColor2And3 = findClosestAccessibleColor(this.state.hexColor2, this.state.hexColor3, this.state.selectedContrastRatio23)
 
-    const x = new Set()
-    // to be moved to state
-    if(this.state.colorsToChange === '12'){
-      console.log('test ', hexColor1And2, hexColor1And3, this.state.selectedContrastRatio13);
-      const min = this.state.selectedContrastRatio12;
-      console.log('min ',min)
-      const max = 21;
-      for (var i=min; i<=max; i=i+0.01){
-        console.log(i)
-        const result_12 = findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, i);
-        const result_1213 = findClosestAccessibleColor(result_12, hexColor1And3, this.state.selectedContrastRatio13)
+    // this.setState({
+    //   findColors: 'touched',
+    //   hexColor1And2: hexColor1And2,
+    //   hexColor1And3: hexColor1And3,
+    //   hexColor2And3: hexColor2And3,
+    // });
+
+    // const x = new Set()
+    // // to be moved to state
+    // if(this.state.colorsToChange === '12'){
+    //   const min = this.state.selectedContrastRatio12;
+    //   const max = 21;
+    //   for (var i=min; i<=max; i=i+0.01){
+    //     const result_12 = findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, i);
+    //     const result_1213 = findClosestAccessibleColor(result_12, hexColor1And3, this.state.selectedContrastRatio13)
         
-        x.add(result_1213)
-      }
-      console.log('xxxxxxx: ', x)
-    }
-    console.log(this.state.colorsToChange)
+    //     x.add(result_1213)
+    //   }
+    // }
 
     // find the result color using 2 different colors
 
@@ -198,24 +192,23 @@ class App extends React.Component {
   }
 
   render() {
-    const newTextColor = this.state.hexColor1And2;
-    console.log('selectedCR23 ', this.state.selectedContrastRatio23);
+    const newTextColor12 =
+    findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, this.state.selectedContrastRatio12);
 
-    let touchedText = "";
-    touchedText = this.state.selectedContrastRatio12>0 && this.state.selectedContrastRatio13>0 && this.state.selectedContrastRatio23 === 0
-      ? '1213'
-      :  this.state.selectedContrastRatio12>0 && this.state.selectedContrastRatio23>0
-        ? '1223'
-        :  this.state.selectedContrastRatio13>0 && this.state.selectedContrastRatio23>0
-          ? '1323'
-          : this.state.selectedContrastRatio12>0
-            ? '12'
-            : this.state.selectedContrastRatio23 >0
-            ? '23'
-            : this.state.selectedContrastRatio13>0
-              ? '13'
-              : ''
-    console.log('Touched Text is ', touchedText);
+    // let touchedText = "";
+    // touchedText = this.state.selectedContrastRatio12>0 && this.state.selectedContrastRatio13>0 && this.state.selectedContrastRatio23 === 0
+    //   ? '1213'
+    //   :  this.state.selectedContrastRatio12>0 && this.state.selectedContrastRatio23>0
+    //     ? '1223'
+    //     :  this.state.selectedContrastRatio13>0 && this.state.selectedContrastRatio23>0
+    //       ? '1323'
+    //       : this.state.selectedContrastRatio12>0
+    //         ? '12'
+    //         : this.state.selectedContrastRatio23 >0
+    //         ? '23'
+    //         : this.state.selectedContrastRatio13>0
+    //           ? '13'
+    //           : ''
     const newBackgroundColor12 =
     findClosestAccessibleColor(this.state.hexColor2, this.state.hexColor1, this.state.selectedContrastRatio12);
 
@@ -231,7 +224,7 @@ class App extends React.Component {
       <div className="mainColorResultContainer">
         <div className="12changeColor1">
           <p>
-            If you change Color 1 to : {newTextColor}, your CR is
+            If you change Color 1 to : {newTextColor12}, your CR is
             good enough.
           </p>
           <br />
@@ -239,7 +232,7 @@ class App extends React.Component {
           <div
             style={{
               display: "inline-block",
-              backgroundColor: newTextColor,
+              backgroundColor: newTextColor12,
               height: "50px",
               width: "250px",
               border: "2px solid grey",

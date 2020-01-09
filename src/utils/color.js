@@ -295,10 +295,14 @@ function findClosestAccessibleLighterColor(adjustableColor, otherColor, contrast
 }
 
 export default function findClosestAccessibleColor(adjustableColor, otherColor, contrastRatio) {
-  const closestDarkerColor =
-    findClosestAccessibleDarkerColor(adjustableColor, otherColor, contrastRatio);
+  const closestDarkerColor = 
+    (adjustableColor.length === 4 || adjustableColor.length === 7) &&
+    (otherColor.length === 4 || otherColor.length === 7) ?
+    findClosestAccessibleDarkerColor(adjustableColor, otherColor, contrastRatio) : null;
   const closestLighterColor =
-    findClosestAccessibleLighterColor(adjustableColor, otherColor, contrastRatio);
+    (adjustableColor.length === 4 || adjustableColor.length === 7) &&
+    (otherColor.length === 4 || otherColor.length === 7) ?
+    findClosestAccessibleLighterColor(adjustableColor, otherColor, contrastRatio) : null;
 
   if (closestDarkerColor === null) {
     if (closestLighterColor === null) {

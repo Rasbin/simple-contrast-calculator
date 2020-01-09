@@ -23,8 +23,6 @@ class ColorSuggestion extends React.Component {
   }
 
   render() {
-    console.log('Contrast Ratio 12 ', this.props.selectedContrastRatio12);
-
     return (
       <div>
         <br />

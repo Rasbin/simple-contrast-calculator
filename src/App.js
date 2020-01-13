@@ -197,20 +197,32 @@ class App extends React.Component {
   }
 
   colorResult1213 = () => {
-    const result_12 = findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, this.state.selectedContrastRatio12);
-    const result_1213 = findClosestAccessibleColor(result_12, this.state.hexColor3, this.selectedContrastRatio13);
+    const result_12 = (this.state.hexColor1.length === 4 || this.state.hexColor1.length === 7) &&
+    (this.state.hexColor2.length === 4 || this.state.hexColor2.length === 7) ?
+    findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, this.state.selectedContrastRatio12): '';
+    const result_1213 = (result_12.length === 4 || result_12.length === 7) &&
+    (this.state.hexColor3.length === 4 || this.state.hexColor3.length === 7) ?
+    findClosestAccessibleColor(result_12, this.state.hexColor3, this.state.selectedContrastRatio13): '';
     return result_1213;
   }
 
   colorResult1223 = () => {
-    const result_12 = findClosestAccessibleColor(this.state.hexColor2, this.state.hexColor1, this.state.selectedContrastRatio12);
-    const result_1223 = findClosestAccessibleColor(result_12, this.state.hexColor3, this.selectedContrastRatio23);
+    const result_12 = (this.state.hexColor1.length === 4 || this.state.hexColor1.length === 7) &&
+    (this.state.hexColor2.length === 4 || this.state.hexColor2.length === 7) ?
+    findClosestAccessibleColor(this.state.hexColor2, this.state.hexColor1, this.state.selectedContrastRatio12) : '';
+    const result_1223 = (result_12.length === 4 || result_12.length === 7) &&
+    (this.state.hexColor3.length === 4 || this.state.hexColor3.length === 7) ?
+    findClosestAccessibleColor(result_12, this.state.hexColor3, this.state.selectedContrastRatio23) : '';
     return result_1223;
   }
 
   colorResult1323 = () => {
-    const result_13 = findClosestAccessibleColor(this.state.hexColor3, this.state.hexColor1, this.state.selectedContrastRatio13);
-    const result_1323 = findClosestAccessibleColor(result_13, this.state.hexColor2, this.selectedContrastRatio23);
+    const result_13 = (this.state.hexColor1.length === 4 || this.state.hexColor1.length === 7) &&
+    (this.state.hexColor3.length === 4 || this.state.hexColor3.length === 7) ?
+    findClosestAccessibleColor(this.state.hexColor3, this.state.hexColor1, this.state.selectedContrastRatio13) : '';
+    const result_1323 = (result_13.length === 4 || result_13.length === 7) &&
+    (this.state.hexColor2.length === 4 || this.state.hexColor2.length === 7) ?
+    findClosestAccessibleColor(result_13, this.state.hexColor2, this.state.selectedContrastRatio23) : '';
     return result_1323;
   }
 

@@ -197,21 +197,21 @@ class App extends React.Component {
   }
 
   colorResult1213 = () => {
-    console.log('Color Result 1213 is triggered');
     const result_12 = findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, this.state.selectedContrastRatio12);
-    console.log('Result_12 ', result_12);
     const result_1213 = findClosestAccessibleColor(result_12, this.state.hexColor3, this.selectedContrastRatio13);
-    console.log('Result_1213 ', result_1213);
     return result_1213;
   }
 
   colorResult1223 = () => {
-    console.log('Color Result 1223 is triggered');
     const result_12 = findClosestAccessibleColor(this.state.hexColor2, this.state.hexColor1, this.state.selectedContrastRatio12);
-    console.log('Result_12 ', result_12);
     const result_1223 = findClosestAccessibleColor(result_12, this.state.hexColor3, this.selectedContrastRatio23);
-    console.log('Result_1223 ', result_1223);
     return result_1223;
+  }
+
+  colorResult1323 = () => {
+    const result_13 = findClosestAccessibleColor(this.state.hexColor3, this.state.hexColor1, this.state.selectedContrastRatio13);
+    const result_1323 = findClosestAccessibleColor(result_13, this.state.hexColor2, this.selectedContrastRatio23);
+    return result_1323;
   }
 
   render() {
@@ -229,11 +229,6 @@ class App extends React.Component {
             : this.state.selectedContrastRatio13>0 && this.state.selectedContrastRatio12<1 && this.state.selectedContrastRatio23<1
               ? '13'
               : ''
-    
-    console.log('Let us check the touched text ', touchedText);
-    if (touchedText === '1213') {
-      this.colorResult1213()
-    }
 
     const newTextColor12 =
     findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, this.state.selectedContrastRatio12);
@@ -594,6 +589,49 @@ class App extends React.Component {
       </div>
     );
 
+    const colorResult1323 = (
+      <div className="mainColorResultContainer">
+        <div className="12changeColor1">
+          <p>
+            If you change Color 3 to : {this.colorResult1323()}, your CR is
+            good enough.
+          </p>
+          <br />
+
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: newTextColor12,
+              height: "50px",
+              width: "250px",
+              border: "2px solid grey",
+              borderRadius: 5
+            }}
+          ></div>
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: this.state.hexColor2,
+              height: "50px",
+              width: "250px",
+              border: "2px solid grey",
+              borderRadius: 5
+            }}
+          ></div>
+          <div
+            style={{
+              display: "inline-block",
+              backgroundColor: this.state.hexColor3,
+              height: "50px",
+              width: "250px",
+              border: "2px solid grey",
+              borderRadius: 5
+            }}
+          ></div>
+        </div>
+      </div>
+    );
+
     return (
       <div className="App">
         <h1>Color Contrast Calculator</h1>
@@ -705,16 +743,28 @@ class App extends React.Component {
         this.state.selectedContrastRatio12 > 0 &&
         this.state.selectedContrastRatio13 > 0 &&
         this.state.selectedContrastRatio23 < 1 &&
-        this.state.colorsToChange == 1 && colorResult1213}
+        // this.state.colorsToChange == 1 && colorResult1213}
+        colorResult1213}
 
         {this.state.cr12status === 'touched' &&
         this.state.cr13status === 'touched' &&
         this.state.cr23status === 'touched' &&
         this.state.findColors === 'touched' && 
         this.state.selectedContrastRatio12 > 0 &&
-        this.state.selectedContrastRatio13 < 1 &&
         this.state.selectedContrastRatio23 > 0 &&
-        this.state.colorsToChange == 2 && colorResult1223}
+        this.state.selectedContrastRatio13 < 1 &&
+        //this.state.colorsToChange == 2 && colorResult1223}
+        colorResult1223}
+
+        {this.state.cr12status === 'touched' &&
+        this.state.cr13status === 'touched' &&
+        this.state.cr23status === 'touched' &&
+        this.state.findColors === 'touched' && 
+        this.state.selectedContrastRatio13 > 0 &&
+        this.state.selectedContrastRatio23 > 0 &&
+        this.state.selectedContrastRatio12 < 1 &&
+        //this.state.colorsToChange == 2 && colorResult1223}
+        colorResult1323}
       </div>
     );
   }

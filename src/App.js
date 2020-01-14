@@ -5,6 +5,7 @@ import CurrentColorContrast from './CurrentColorContrast';
 import HexToHSL from './utils/HexToHSL';
 import HSLToHex from './utils/HSLToHex';
 import findClosestAccessibleColor from './utils/color';
+import ColorResultComponent from './components/ColorResults';
 import './App.css';
 
 class App extends React.Component {
@@ -40,7 +41,9 @@ class App extends React.Component {
     touchedText: '',
     newTextColor12: '',
     newTextColor13: '',
-    newTextColor23: ''
+    newTextColor23: '',
+
+    selectedNumber: ''
   }
 
   handleFindColors = () => {
@@ -58,22 +61,6 @@ class App extends React.Component {
       hexColor1And3: hexColor1And3,
       hexColor2And3: hexColor2And3,
     });
-
-    // const x = new Set()
-    // // to be moved to state
-    // if(this.state.colorsToChange === '12'){
-    //   const min = this.state.selectedContrastRatio12;
-    //   const max = 21;
-    //   for (var i=min; i<=max; i=i+0.01){
-    //     const result_12 = findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, i);
-    //     const result_1213 = findClosestAccessibleColor(result_12, hexColor1And3, this.state.selectedContrastRatio13)
-        
-    //     x.add(result_1213)
-    //   }
-    // }
-
-    // find the result color using 2 different colors
-
   }
 
   handleHexColorChange = (colorNumber, hexColorValue) => {
@@ -166,12 +153,30 @@ class App extends React.Component {
     )
   }
 
+  updateRadioButtonChange=(selectednum, colorRatio)=>{
+    const order = ['1213','1223','1323'];
+    if(colorRatio>0){
+      if(!this.state.selectedNumber.includes(selectednum)){
+        this.setState({
+          selectedNumber: Number(this.state.selectedNumber|| 0) > Number(selectednum)
+            ?  selectednum + this.state.selectedNumber
+            :  this.state.selectedNumber+selectednum
+        })
+      }
+    }else{
+      this.setState({
+        selectedNumber: this.state.selectedNumber.replace(selectednum,'')
+      })
+    }
+  }
+
   handleUpdateCR12 = colorRatio12 => {
     this.setState({
       selectedContrastRatio12: colorRatio12,
       cr12status: 'touched',
     })
     this.handleFindColors()
+    this.updateRadioButtonChange('12',colorRatio12)
   }
 
   handleUpdateCR13 = colorRatio13 => {
@@ -180,6 +185,7 @@ class App extends React.Component {
       cr13status: 'touched',
     })
     this.handleFindColors()
+    this.updateRadioButtonChange('13',colorRatio13)
   }
 
   handleUpdateCR23 = colorRatio23 => {
@@ -188,6 +194,7 @@ class App extends React.Component {
       cr23status: 'touched',
     })
     this.handleFindColors()
+    this.updateRadioButtonChange('23',colorRatio23)
   }
 
   handleUpdateColorsToChange = colorsToChange => {
@@ -196,37 +203,50 @@ class App extends React.Component {
     })
   }
 
-  colorResult1213 = () => {
-    const result_12 = (this.state.hexColor1.length === 4 || this.state.hexColor1.length === 7) &&
-    (this.state.hexColor2.length === 4 || this.state.hexColor2.length === 7) ?
-    findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, this.state.selectedContrastRatio12): '';
-    const result_1213 = (result_12.length === 4 || result_12.length === 7) &&
-    (this.state.hexColor3.length === 4 || this.state.hexColor3.length === 7) ?
-    findClosestAccessibleColor(result_12, this.state.hexColor3, this.state.selectedContrastRatio13): '';
-    return result_1213;
+  colorResultTest = (ratio1, ratio2, thirdColor="") => {
+    // console.log('selectedColor ',selectedColor)
+    const colorArr = this.state.selectedNumber.split('');
+    // console.log('colorArr ',colorArr)
+
+    const result_1 = (eval(`this.state.hexColor${colorArr[0]}`).length === 4 || eval(`this.state.hexColor${colorArr[0]}`).length === 7) &&
+    (eval(`this.state.hexColor${colorArr[1]}`).length === 4 || eval(`this.state.hexColor${colorArr[1]}`).length === 7) ?
+    findClosestAccessibleColor(eval(`this.state.hexColor${colorArr[0]}`), eval(`this.state.hexColor${colorArr[1]}`), ratio1): '';
+    // console.log('result_1 ',result_1)
+
+    if(!thirdColor){
+      return result_1;
+    }
+    const result = (result_1.length === 4 || result_1.length === 7) &&
+    (thirdColor.length === 4 || thirdColor.length === 7) ?
+    findClosestAccessibleColor(result_1, thirdColor, ratio2): '';
+    console.log('result 2 ',result)
+    return result;
   }
 
-  colorResult1223 = () => {
-    const result_12 = (this.state.hexColor1.length === 4 || this.state.hexColor1.length === 7) &&
-    (this.state.hexColor2.length === 4 || this.state.hexColor2.length === 7) ?
-    findClosestAccessibleColor(this.state.hexColor2, this.state.hexColor1, this.state.selectedContrastRatio12) : '';
-    const result_1223 = (result_12.length === 4 || result_12.length === 7) &&
-    (this.state.hexColor3.length === 4 || this.state.hexColor3.length === 7) ?
-    findClosestAccessibleColor(result_12, this.state.hexColor3, this.state.selectedContrastRatio23) : '';
-    return result_1223;
-  }
+  colorResult = (color1, color2, ratio, ratio2="") => {
+    // console.log('selectedColor ',selectedColor)
+    // const colorArr = this.state.selectedNumber.split('');
+    // console.log('colorArr ',colorArr)
 
-  colorResult1323 = () => {
-    const result_13 = (this.state.hexColor1.length === 4 || this.state.hexColor1.length === 7) &&
-    (this.state.hexColor3.length === 4 || this.state.hexColor3.length === 7) ?
-    findClosestAccessibleColor(this.state.hexColor3, this.state.hexColor1, this.state.selectedContrastRatio13) : '';
-    const result_1323 = (result_13.length === 4 || result_13.length === 7) &&
-    (this.state.hexColor2.length === 4 || this.state.hexColor2.length === 7) ?
-    findClosestAccessibleColor(result_13, this.state.hexColor2, this.state.selectedContrastRatio23) : '';
-    return result_1323;
+    let result = (color1.length === 4 || color1.length === 7) &&
+    (color2.length === 4 || color2.length === 7) ?
+    findClosestAccessibleColor(color1, color2, ratio): '';
+    // console.log('result_1 ',result_1)
+
+    // if(!thirdColor){
+    //   return result_1;
+    // }
+    // const result = (result_1.length === 4 || result_1.length === 7) &&
+    // (thirdColor.length === 4 || thirdColor.length === 7) ?
+    // findClosestAccessibleColor(result_1, thirdColor, ratio): '';
+    // console.log('result 2 ',result)
+    console.log(color1, color2, ratio, ratio2="", result)
+    return result;
   }
 
   render() {
+
+    console.log('selectedNumber ',this.state.selectedNumber)
     let touchedText = "";
     touchedText = this.state.selectedContrastRatio12>0 && this.state.selectedContrastRatio13>0 && this.state.selectedContrastRatio23 < 1
       ? '1213'
@@ -257,392 +277,26 @@ class App extends React.Component {
     const newBackgroundColor23 =
     findClosestAccessibleColor(this.state.hexColor3, this.state.hexColor2, this.state.selectedContrastRatio23);
 
-    const colorResult12 = (
-      <div className="mainColorResultContainer">
-        <div className="12changeColor1">
-          <p>
-            If you change Color 1 to : {newTextColor12}, your CR is
-            good enough.
-          </p>
-          <br />
+    //  find result colr based on selectedNumber
 
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: newTextColor12,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor2,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor3,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-        </div>
-      </div>
-    );
+    // 12
+    // this.state.colorsToChange // 1,2
 
-    const backColorResult12 = (
-      <div className="mainColorResultContainer">
-        <div className="12changeColor1">
-          <p>
-            If you change Color 2 to : {newBackgroundColor12}, your CR is
-            good enough.
-          </p>
-          <br />
+    //12 // 2
+    let result;
+    if(this.state.selectedNumber && this.state.selectedNumber.length<=2){
+      let hexColor = this.state.selectedNumber;
 
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor1,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: newBackgroundColor12,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor3,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-        </div>
-      </div>
-    );
+      if(this.state.colorsToChange && hexColor.charAt(0)!==this.state.colorsToChange.toString()){
+        hexColor = hexColor.split("").reverse().join("")
 
-    const colorResult13 = (
-      <div className="mainColorResultContainer">
-        <div className="13changeColor1">
-          <p>
-            If you change Color 1 to : {newTextColor13}, your CR is
-            good enough.
-          </p>
-          <br />
-
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: newTextColor13,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor2,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor3,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-        </div>
-      </div>
-    );
-
-    const backColorResult13 = (
-      <div className="mainColorResultContainer">
-        <div className="13changeColor1">
-          <p>
-            If you change Color 3 to : {newBackgroundColor13}, your CR is
-            good enough.
-          </p>
-          <br />
-
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor1,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor2,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: newBackgroundColor13,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-        </div>
-      </div>
-    );
-
-    const colorResult23 = (
-      <div className="mainColorResultContainer">
-        <div className="13changeColor1">
-          <p>
-            If you change Color 2 to : {newTextColor23}, your CR is
-            good enough.
-          </p>
-          <br />
-
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor1,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: newTextColor23,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor3,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-        </div>
-      </div>
-    );
-
-    const backColorResult23 = (
-      <div className="mainColorResultContainer">
-        <div className="13changeColor1">
-          <p>
-            If you change Color 3 to : {newBackgroundColor23}, your CR is
-            good enough.
-          </p>
-          <br />
-
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor1,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor2,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: newBackgroundColor23,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-        </div>
-      </div>
-    );
-
-    const colorResult1213 = (
-      <div className="mainColorResultContainer">
-        <div className="12changeColor1">
-          <p>
-            If you change Color 1 to : {this.colorResult1213()}, your CR is
-            good enough.
-          </p>
-          <br />
-
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: newTextColor12,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor2,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor3,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-        </div>
-      </div>
-    );
-
-    const colorResult1223 = (
-      <div className="mainColorResultContainer">
-        <div className="12changeColor1">
-          <p>
-            If you change Color 2 to : {this.colorResult1223()}, your CR is
-            good enough.
-          </p>
-          <br />
-
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: newTextColor12,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor2,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor3,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-        </div>
-      </div>
-    );
-
-    const colorResult1323 = (
-      <div className="mainColorResultContainer">
-        <div className="12changeColor1">
-          <p>
-            If you change Color 3 to : {this.colorResult1323()}, your CR is
-            good enough.
-          </p>
-          <br />
-
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: newTextColor12,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor2,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-          <div
-            style={{
-              display: "inline-block",
-              backgroundColor: this.state.hexColor3,
-              height: "50px",
-              width: "250px",
-              border: "2px solid grey",
-              borderRadius: 5
-            }}
-          ></div>
-        </div>
-      </div>
-    );
+      }      
+      result = this.colorResult(
+        eval(`this.state.hexColor${this.state.selectedNumber.charAt(0)}`),
+        eval(`this.state.hexColor${this.state.selectedNumber.charAt(1)}`),
+        eval(`this.state.selectedContrastRatio${this.state.selectedNumber}`)
+        )
+    }
 
     return (
       <div className="App">
@@ -693,90 +347,17 @@ class App extends React.Component {
           parentCallBackFindColors={this.handleFindColors}
         />
         <br />
-        
-        {this.state.cr12status === 'touched' &&
-        this.state.cr13status === 'touched' &&
-        this.state.cr23status === 'touched' &&
-        this.state.findColors === 'touched' && 
-        this.state.selectedContrastRatio12 > 0 &&
-        this.state.selectedContrastRatio13 < 1 &&
-        this.state.selectedContrastRatio23 < 1 &&
-        this.state.colorsToChange == 1 && colorResult12}
 
-        {this.state.cr12status === 'touched' &&
-        this.state.cr13status === 'touched' &&
-        this.state.cr23status === 'touched' &&
-        this.state.findColors === 'touched' && 
-        this.state.selectedContrastRatio12 > 0 &&
-        this.state.selectedContrastRatio13 < 1 &&
-        this.state.selectedContrastRatio23 < 1 &&
-        this.state.colorsToChange == 2 && backColorResult12}
+        {/* render based on selectedNumber */}
+        <ColorResultComponent
+          resultColor={result || this.state.hexColor1}
+          selectedNumber={this.state.selectedNumber}
+          color1={this.state.hexColor1}
+          color2={this.state.hexColor2}
+          color3={this.state.hexColor3}
+          selectedColor={this.state.colorsToChange.toString()}
+        />
 
-        {this.state.cr12status === 'touched' &&
-        this.state.cr13status === 'touched' &&
-        this.state.cr23status === 'touched' &&
-        this.state.findColors === 'touched' && 
-        this.state.selectedContrastRatio13 > 0 &&
-        this.state.selectedContrastRatio12 < 1 &&
-        this.state.selectedContrastRatio23 < 1 &&
-        this.state.colorsToChange == 1 && colorResult13}
-
-        {this.state.cr12status === 'touched' &&
-        this.state.cr13status === 'touched' &&
-        this.state.cr23status === 'touched' &&
-        this.state.findColors === 'touched' && 
-        this.state.selectedContrastRatio13 > 0 &&
-        this.state.selectedContrastRatio12 < 1 &&
-        this.state.selectedContrastRatio23 < 1 &&
-        this.state.colorsToChange == 3 && backColorResult13}
-
-        {this.state.cr12status === 'touched' &&
-        this.state.cr13status === 'touched' &&
-        this.state.cr23status === 'touched' &&
-        this.state.findColors === 'touched' && 
-        this.state.selectedContrastRatio23 > 0 &&
-        this.state.selectedContrastRatio12 < 1 &&
-        this.state.selectedContrastRatio13 < 1 &&
-        this.state.colorsToChange == 2 && colorResult23}
-
-        {this.state.cr12status === 'touched' &&
-        this.state.cr13status === 'touched' &&
-        this.state.cr23status === 'touched' &&
-        this.state.findColors === 'touched' && 
-        this.state.selectedContrastRatio23 > 0 &&
-        this.state.selectedContrastRatio12 < 1 &&
-        this.state.selectedContrastRatio13 < 1 &&
-        this.state.colorsToChange == 3 && backColorResult23}
-
-        {this.state.cr12status === 'touched' &&
-        this.state.cr13status === 'touched' &&
-        this.state.cr23status === 'touched' &&
-        this.state.findColors === 'touched' && 
-        this.state.selectedContrastRatio12 > 0 &&
-        this.state.selectedContrastRatio13 > 0 &&
-        this.state.selectedContrastRatio23 < 1 &&
-        // this.state.colorsToChange == 1 && colorResult1213}
-        colorResult1213}
-
-        {this.state.cr12status === 'touched' &&
-        this.state.cr13status === 'touched' &&
-        this.state.cr23status === 'touched' &&
-        this.state.findColors === 'touched' && 
-        this.state.selectedContrastRatio12 > 0 &&
-        this.state.selectedContrastRatio23 > 0 &&
-        this.state.selectedContrastRatio13 < 1 &&
-        //this.state.colorsToChange == 2 && colorResult1223}
-        colorResult1223}
-
-        {this.state.cr12status === 'touched' &&
-        this.state.cr13status === 'touched' &&
-        this.state.cr23status === 'touched' &&
-        this.state.findColors === 'touched' && 
-        this.state.selectedContrastRatio13 > 0 &&
-        this.state.selectedContrastRatio23 > 0 &&
-        this.state.selectedContrastRatio12 < 1 &&
-        //this.state.colorsToChange == 2 && colorResult1223}
-        colorResult1323}
       </div>
     );
   }

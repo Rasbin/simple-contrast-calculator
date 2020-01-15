@@ -5,7 +5,10 @@ const ColorResults=(props)=>{
   console.log('resultColor ', resultColor, 'Selected Color ', selectedColor)
   const result= selectedColor && selectedNumber.includes(selectedColor) ? selectedColor: "***"
 
-  const resultDiv = <div className="mainColorResultContainer">
+  const resultDiv = 
+  resultColor.map((each, i) =>
+    (
+    <div key={i} className="mainColorResultContainer">
   {
     selectedColor && selectedNumber.includes(selectedColor)
       ? 
@@ -16,18 +19,6 @@ const ColorResults=(props)=>{
       </p>
   
     <br />
-
-    {/* {
-      arr.map((each, i)=>{
-        return(
-          <div key={i}>
-            <span>{i}</span>
-            <span>{each.name}</span>
-            <span>{each.name}</span>
-          </div>
-        )
-      })
-    } */}
 
     <div
       style={{
@@ -62,7 +53,9 @@ const ColorResults=(props)=>{
   </div>
   : null
   }
-</div>
+  </div>)
+  )
+  
 
   return (
     resultDiv

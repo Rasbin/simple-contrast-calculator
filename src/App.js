@@ -224,24 +224,18 @@ class App extends React.Component {
   }
 
   colorResult = (color1, color2, ratio, ratio2="") => {
-    // console.log('selectedColor ',selectedColor)
-    // const colorArr = this.state.selectedNumber.split('');
-    // console.log('colorArr ',colorArr)
+    let resultArr = [];
+    console.log('Result before loop ', resultArr);
+    let i = 0;
 
-    let result = (color1.length === 4 || color1.length === 7) &&
-    (color2.length === 4 || color2.length === 7) ?
-    findClosestAccessibleColor(color1, color2, ratio): '';
-    // console.log('result_1 ',result_1)
-
-    // if(!thirdColor){
-    //   return result_1;
-    // }
-    // const result = (result_1.length === 4 || result_1.length === 7) &&
-    // (thirdColor.length === 4 || thirdColor.length === 7) ?
-    // findClosestAccessibleColor(result_1, thirdColor, ratio): '';
-    // console.log('result 2 ',result)
-    console.log(color1, color2, ratio, ratio2="", result)
-    return result;
+    for (i = 0; i < 20; i++) {
+      let result = (color1.length === 4 || color1.length === 7) &&
+      (color2.length === 4 || color2.length === 7) ?
+      findClosestAccessibleColor(color1, color2, ratio): '';
+      resultArr.push(result);
+    }
+    console.log('Result after loop ', resultArr);
+    return resultArr;
   }
 
   render() {
@@ -283,7 +277,7 @@ class App extends React.Component {
     // this.state.colorsToChange // 1,2
 
     //12 // 2
-    let result;
+    let result = [];
     if(this.state.selectedNumber && this.state.selectedNumber.length<=2){
       let hexColor = this.state.selectedNumber;
 

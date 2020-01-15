@@ -6,6 +6,7 @@ import HexToHSL from './utils/HexToHSL';
 import HSLToHex from './utils/HSLToHex';
 import findClosestAccessibleColor from './utils/color';
 import ColorResultComponent from './components/ColorResults';
+import { calcContrast } from './utils/ContrastFunc';
 import './App.css';
 
 class App extends React.Component {
@@ -233,6 +234,7 @@ class App extends React.Component {
       (color2.length === 4 || color2.length === 7) ?
       findClosestAccessibleColor(color1, color2, ratio): '';
       resultArr.push(result);
+      ratio = calcContrast(result, color2) + 0.1;
     }
     console.log('Result after loop ', resultArr);
     return resultArr;

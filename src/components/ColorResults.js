@@ -14,7 +14,7 @@ const ColorResults=(props)=>{
       ? 
   <div className="13changeColor1">
       <p>
-        If you change Color {result} to : {resultColor}, your CR is
+        If you change Color {result} to : {each}, your CR is
         good enough.
       </p>
   
@@ -23,7 +23,7 @@ const ColorResults=(props)=>{
     <div
       style={{
         display: "inline-block",
-        backgroundColor: selectedColor=='1' && selectedNumber.includes('1')  ? resultColor:color1,
+        backgroundColor: selectedColor=='1' && selectedNumber.includes('1')  ? each:color1,
         height: "50px",
         width: "250px",
         border: "2px solid grey",
@@ -33,7 +33,7 @@ const ColorResults=(props)=>{
     <div
       style={{
         display: "inline-block",
-        backgroundColor: selectedColor=='2'&& selectedNumber.includes('2')  ? resultColor:color2,
+        backgroundColor: selectedColor=='2'&& selectedNumber.includes('2')  ? each:color2,
         height: "50px",
         width: "250px",
         border: "2px solid grey",
@@ -43,7 +43,7 @@ const ColorResults=(props)=>{
     <div
       style={{
         display: "inline-block",
-        backgroundColor: selectedColor=='3'&& selectedNumber.includes('3')  ? resultColor:color3,
+        backgroundColor: selectedColor=='3'&& selectedNumber.includes('3')  ? each:color3,
         height: "50px",
         width: "250px",
         border: "2px solid grey",

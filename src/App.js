@@ -220,29 +220,29 @@ class App extends React.Component {
     const result = (result_1.length === 4 || result_1.length === 7) &&
     (thirdColor.length === 4 || thirdColor.length === 7) ?
     findClosestAccessibleColor(result_1, thirdColor, ratio2): '';
-    console.log('result 2 ',result)
+    // console.log('result 2 ',result)
     return result;
   }
 
   colorResult = (color1, color2, ratio, ratio2="") => {
     let resultArr = [];
-    console.log('Result before loop ', resultArr);
+    // console.log('Result before loop ', resultArr);
     let i = 0;
 
-    for (i = 0; i < 20; i++) {
+    for (i = 0; i < 5; i++) {
       let result = (color1.length === 4 || color1.length === 7) &&
       (color2.length === 4 || color2.length === 7) ?
       findClosestAccessibleColor(color1, color2, ratio): '';
       resultArr.push(result);
-      ratio = calcContrast(result, color2) + 0.2;
+      ratio = calcContrast(result, color2) + 0.1;
     }
-    console.log('Result after loop ', resultArr);
+    // console.log('Result after loop ', resultArr);
     return resultArr;
   }
 
   render() {
 
-    console.log('selectedNumber ',this.state.selectedNumber)
+    // console.log('selectedNumber ',this.state.selectedNumber)
     let touchedText = "";
     touchedText = this.state.selectedContrastRatio12>0 && this.state.selectedContrastRatio13>0 && this.state.selectedContrastRatio23 < 1
       ? '1213'
@@ -283,13 +283,24 @@ class App extends React.Component {
     if(this.state.selectedNumber && this.state.selectedNumber.length<=2){
       let hexColor = this.state.selectedNumber;
 
+      console.log('Selected Number : ', this.state.selectedNumber);
+      console.log('Color to Change : ', this.state.colorsToChange);
+      console.log('HEX Color : ', hexColor);
+
       if(this.state.colorsToChange && hexColor.charAt(0)!==this.state.colorsToChange.toString()){
         hexColor = hexColor.split("").reverse().join("")
+        console.log('HEX COLOR inside if condition : ', hexColor);
+      }
+      
+      console.log('First HEX Color value : ', hexColor.charAt(0));
+      console.log('Second HEX Color value : ', hexColor.charAt(1));
 
-      }      
+      console.log('EVAL FIRST HEX in Color formula : ', eval(`this.state.hexColor${hexColor.charAt(0)}`));
+      console.log('EVAL SECOND HEX in Color formula : ', eval(`this.state.hexColor${hexColor.charAt(1)}`));
+
       result = this.colorResult(
-        eval(`this.state.hexColor${this.state.selectedNumber.charAt(0)}`),
-        eval(`this.state.hexColor${this.state.selectedNumber.charAt(1)}`),
+        eval(`this.state.hexColor${hexColor.charAt(0)}`),
+        eval(`this.state.hexColor${hexColor.charAt(1)}`),
         eval(`this.state.selectedContrastRatio${this.state.selectedNumber}`)
         )
     }
@@ -345,6 +356,7 @@ class App extends React.Component {
         <br />
 
         {/* render based on selectedNumber */}
+        {console.log('color 2 passing :----', this.state.hexColor2)}
         <ColorResultComponent
           resultColor={result || this.state.hexColor1}
           selectedNumber={this.state.selectedNumber}

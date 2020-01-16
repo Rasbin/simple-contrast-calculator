@@ -23,10 +23,8 @@ const ColorResults=(props)=>{
       ? 
   <div className="13changeColor1">
       <p>
-        If you change Color {result} to : {each}, your CR with {calcContrast(each, secondColorToCheckCR)}
-        is good enough.
+        If you change Color {result} to : {each}, your CR will be {calcContrast(each, secondColorToCheckCR)}
       </p>
-  
     <br />
 
     <div

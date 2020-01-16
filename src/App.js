@@ -234,7 +234,7 @@ class App extends React.Component {
       (color2.length === 4 || color2.length === 7) ?
       findClosestAccessibleColor(color1, color2, ratio): '';
       resultArr.push(result);
-      ratio = calcContrast(result, color2) + 0.1;
+      ratio = calcContrast(result, color2) + 0.2;
     }
     console.log('Result after loop ', resultArr);
     return resultArr;

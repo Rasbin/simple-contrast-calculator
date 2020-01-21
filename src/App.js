@@ -229,7 +229,7 @@ class App extends React.Component {
     // console.log('Result before loop ', resultArr);
     let i = 0;
 
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < 20; i++) {
       let result = (color1.length === 4 || color1.length === 7) &&
       (color2.length === 4 || color2.length === 7) ?
       findClosestAccessibleColor(color1, color2, ratio): '';

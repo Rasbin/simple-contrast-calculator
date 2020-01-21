@@ -203,7 +203,7 @@ class App extends React.Component {
     })
   }
 
-  colorResult = (color1, color2, ratio, ratio2 = "") => {
+  colorResult = (color1, color2, ratio) => {
     let resultArr = [];
     let arrSet = new Set();
     let i = 0;
@@ -216,7 +216,9 @@ class App extends React.Component {
       // resultArr.push(color1);
       if (result) {
         arrSet.add(color1);
-        ratio = calcContrast(color1, color2) + 0.01;
+
+        ratio = calcContrast(color1, color2) + 0.00001;
+        console.log('TESTING RATIO ---', ratio);
       } else {
         resultArr = Array.from(arrSet);
         return;

@@ -4,16 +4,6 @@ import { calcContrast } from '../utils/ContrastFunc';
 
 const ColorResults=(props)=>{
   const {resultColor, selectedColor="", color1, color2, color3, selectedNumber="1213"} = props;
-  console.log('Color 2 received : ------', color2);
-  // 12, selectedColor=1
-  // console.log('resultColor ', resultColor, 'Selected Color ', selectedColor)
-  // console.log('Selected Number is ', selectedNumber);
-  const secondColorToCheckCR = selectedNumber.charAt(1) == '1' ?
-  color1
-  : selectedNumber.charAt(1) == '2'
-  ? color2
-  : color3
-  ;
 
   const result= selectedColor && selectedNumber.includes(selectedColor) ? selectedColor: "***"
 

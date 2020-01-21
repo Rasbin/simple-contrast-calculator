@@ -155,7 +155,6 @@ class App extends React.Component {
   }
 
   updateRadioButtonChange = (selectednum, colorRatio) => {
-    const order = ['1213', '1223', '1323'];
     if (colorRatio > 0) {
       if (!this.state.selectedNumber.includes(selectednum)) {
         this.setState({
@@ -217,7 +216,7 @@ class App extends React.Component {
       // resultArr.push(color1);
       if (result) {
         arrSet.add(color1);
-        ratio = calcContrast(color1, color2) + 0.01;
+        ratio = calcContrast(color1, color2) + 0.00001;
       } else {
         resultArr = Array.from(arrSet);
         return;
@@ -229,44 +228,6 @@ class App extends React.Component {
   }
 
   render() {
-
-    // console.log('selectedNumber ',this.state.selectedNumber)
-    let touchedText = "";
-    touchedText = this.state.selectedContrastRatio12 > 0 && this.state.selectedContrastRatio13 > 0 && this.state.selectedContrastRatio23 < 1
-      ? '1213'
-      : this.state.selectedContrastRatio12 > 0 && this.state.selectedContrastRatio23 > 0 && this.state.selectedContrastRatio13 < 1
-        ? '1223'
-        : this.state.selectedContrastRatio13 > 0 && this.state.selectedContrastRatio23 > 0 && this.state.selectedContrastRatio12 < 1
-          ? '1323'
-          : this.state.selectedContrastRatio12 > 0 && this.state.selectedContrastRatio13 < 1 && this.state.selectedContrastRatio23 < 1
-            ? '12'
-            : this.state.selectedContrastRatio23 > 0 && this.state.selectedContrastRatio12 < 1 && this.state.selectedContrastRatio13 < 1
-              ? '23'
-              : this.state.selectedContrastRatio13 > 0 && this.state.selectedContrastRatio12 < 1 && this.state.selectedContrastRatio23 < 1
-                ? '13'
-                : ''
-
-    const newTextColor12 =
-      findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor2, this.state.selectedContrastRatio12);
-    const newBackgroundColor12 =
-      findClosestAccessibleColor(this.state.hexColor2, this.state.hexColor1, this.state.selectedContrastRatio12);
-
-    const newTextColor13 =
-      findClosestAccessibleColor(this.state.hexColor1, this.state.hexColor3, this.state.selectedContrastRatio13);
-    const newBackgroundColor13 =
-      findClosestAccessibleColor(this.state.hexColor3, this.state.hexColor1, this.state.selectedContrastRatio13);
-
-    const newTextColor23 =
-      findClosestAccessibleColor(this.state.hexColor2, this.state.hexColor3, this.state.selectedContrastRatio23);
-    const newBackgroundColor23 =
-      findClosestAccessibleColor(this.state.hexColor3, this.state.hexColor2, this.state.selectedContrastRatio23);
-
-    //  find result colr based on selectedNumber
-
-    // 12
-    // this.state.colorsToChange // 1,2
-
-    //12 // 2
     let result = [];
     // GET RESULT ONLY WHEN ADJUSTABLE COLOR IS CHANGED
     if (this.state.selectedNumber && this.state.colorsToChange) {

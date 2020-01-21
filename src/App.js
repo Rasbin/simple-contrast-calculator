@@ -216,7 +216,7 @@ class App extends React.Component {
       // resultArr.push(color1);
       if (result) {
         arrSet.add(color1);
-        ratio = calcContrast(color1, color2) + 0.00001;
+        ratio = calcContrast(color1, color2) + 0.01;
       } else {
         resultArr = Array.from(arrSet);
         return;

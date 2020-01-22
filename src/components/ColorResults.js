@@ -22,13 +22,14 @@ const ColorResults=(props)=>{
             : (selectedColor == selectedNumber.charAt(1)) ?
             calcContrast(each, eval(`color${selectedNumber.charAt(0)}`))
             : ''
-        } TESTING PURPOSE CR with
+        } 
+        {/* TESTING PURPOSE CR with
         {each} AND...  
         {
           (selectedColor == selectedNumber.charAt(0)) ?
           eval(`color${selectedNumber.charAt(1)}`)
           : eval(`color${selectedNumber.charAt(0)}`)
-        }
+        } */}
       </p>
     <br />
 

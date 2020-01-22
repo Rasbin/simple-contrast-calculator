@@ -11,8 +11,8 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    hexColor1: '#673232',
-    hexColor2: '#7298f8',
+    hexColor1: '#000000',
+    hexColor2: '#000000',
     hexColor3: '#000000',
 
     hexColor1And2: '',

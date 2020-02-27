@@ -65,6 +65,5 @@ export function contrast(str1, str2) {
 }
 
 export function calcContrast(color1, color2) {
-  console.log('TESTING cr cr', Math.round(100000 * contrast(color1, color2)) / 100000);
   return Math.round(100000 * contrast(color1, color2)) / 100000;
 }

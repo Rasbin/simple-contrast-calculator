@@ -1,5 +1,9 @@
 .App {
-  border : 2px dashed darkred;
-  margin: 50px;
-  padding: 50px;
+  padding: 20px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

@@ -1,9 +1,5 @@
 .colorBox {
-  display: flex;
-  justify-content: space-between;
-  min-width: 300px;
-  margin-left: 10px;
-  margin-right: 10px;
+  flex-basis: 350px;
   padding: 15px;
   display: inline-block;
   border: 1px solid grey;

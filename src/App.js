@@ -7,6 +7,8 @@ import HSLToHex from "./utils/HSLToHex";
 import findClosestAccessibleColor from "./utils/color";
 import ColorResultComponent from "./components/ColorResults";
 import { calcContrast } from "./utils/ContrastFunc";
+import Header from "./Header";
+import Footer from "./Footer";
 import "./App.css";
 
 class App extends React.Component {
@@ -55,17 +57,17 @@ class App extends React.Component {
     const hexColor1And2 = findClosestAccessibleColor(
       this.state.hexColor1,
       this.state.hexColor2,
-      this.state.selectedContrastRatio12
+      this.state.selectedContrastRatio12,
     );
     const hexColor1And3 = findClosestAccessibleColor(
       this.state.hexColor1,
       this.state.hexColor3,
-      this.state.selectedContrastRatio13
+      this.state.selectedContrastRatio13,
     );
     const hexColor2And3 = findClosestAccessibleColor(
       this.state.hexColor2,
       this.state.hexColor3,
-      this.state.selectedContrastRatio23
+      this.state.selectedContrastRatio23,
     );
 
     this.setState({
@@ -90,28 +92,28 @@ class App extends React.Component {
             .split("%")[0],
         })
       : colorNumber === 2
-      ? this.setState({
-          hexColor2: hexColorValue,
-          hslColor2: HexToHSL(hexColorValue),
-          hslColor2hue: HexToHSL(hexColorValue).split(",")[0].split("(")[1],
-          hslColor2saturation: HexToHSL(hexColorValue)
-            .split(",")[1]
-            .split("%")[0],
-          hslColor2lightness: HexToHSL(hexColorValue)
-            .split(",")[2]
-            .split("%")[0],
-        })
-      : this.setState({
-          hexColor3: hexColorValue,
-          hslColor3: HexToHSL(hexColorValue),
-          hslColor3hue: HexToHSL(hexColorValue).split(",")[0].split("(")[1],
-          hslColor3saturation: HexToHSL(hexColorValue)
-            .split(",")[1]
-            .split("%")[0],
-          hslColor3lightness: HexToHSL(hexColorValue)
-            .split(",")[2]
-            .split("%")[0],
-        });
+        ? this.setState({
+            hexColor2: hexColorValue,
+            hslColor2: HexToHSL(hexColorValue),
+            hslColor2hue: HexToHSL(hexColorValue).split(",")[0].split("(")[1],
+            hslColor2saturation: HexToHSL(hexColorValue)
+              .split(",")[1]
+              .split("%")[0],
+            hslColor2lightness: HexToHSL(hexColorValue)
+              .split(",")[2]
+              .split("%")[0],
+          })
+        : this.setState({
+            hexColor3: hexColorValue,
+            hslColor3: HexToHSL(hexColorValue),
+            hslColor3hue: HexToHSL(hexColorValue).split(",")[0].split("(")[1],
+            hslColor3saturation: HexToHSL(hexColorValue)
+              .split(",")[1]
+              .split("%")[0],
+            hslColor3lightness: HexToHSL(hexColorValue)
+              .split(",")[2]
+              .split("%")[0],
+          });
   };
 
   handleHSLupdate = (colorNumber, hslElement, hslElementValue) => {
@@ -131,145 +133,145 @@ class App extends React.Component {
             hexColor1: HSLToHex(
               hslElementValue,
               this.state.hslColor1saturation,
-              this.state.hslColor1lightness
+              this.state.hslColor1lightness,
             ),
           })
         : hslElement === "saturation"
-        ? this.setState({
-            hslColor1saturation: hslElementValue,
-            hslColor1:
-              "hsl(" +
-              this.state.hslColor1hue +
-              ", " +
-              hslElementValue +
-              "%, " +
-              this.state.hslColor1lightness +
-              "%)",
-            hexColor1: HSLToHex(
-              this.state.hslColor1hue,
-              hslElementValue,
-              this.state.hslColor1lightness
-            ),
-          })
-        : this.setState({
-            hslColor1lightness: hslElementValue,
-            hslColor1:
-              "hsl(" +
-              this.state.hslColor1hue +
-              ", " +
-              this.state.hslColor1saturation +
-              "%, " +
-              hslElementValue +
-              "%)",
-            hexColor1: HSLToHex(
-              this.state.hslColor1hue,
-              this.state.hslColor1saturation,
-              hslElementValue
-            ),
-          })
+          ? this.setState({
+              hslColor1saturation: hslElementValue,
+              hslColor1:
+                "hsl(" +
+                this.state.hslColor1hue +
+                ", " +
+                hslElementValue +
+                "%, " +
+                this.state.hslColor1lightness +
+                "%)",
+              hexColor1: HSLToHex(
+                this.state.hslColor1hue,
+                hslElementValue,
+                this.state.hslColor1lightness,
+              ),
+            })
+          : this.setState({
+              hslColor1lightness: hslElementValue,
+              hslColor1:
+                "hsl(" +
+                this.state.hslColor1hue +
+                ", " +
+                this.state.hslColor1saturation +
+                "%, " +
+                hslElementValue +
+                "%)",
+              hexColor1: HSLToHex(
+                this.state.hslColor1hue,
+                this.state.hslColor1saturation,
+                hslElementValue,
+              ),
+            })
       : // Update second box HSL color
-      colorNumber === 2
-      ? hslElement === "hue"
-        ? this.setState({
-            hslColor2hue: hslElementValue,
-            hslColor2:
-              "hsl(" +
-              hslElementValue +
-              ", " +
-              this.state.hslColor2saturation +
-              "%, " +
-              this.state.hslColor2lightness +
-              "%)",
-            hexColor2: HSLToHex(
-              hslElementValue,
-              this.state.hslColor2saturation,
-              this.state.hslColor2lightness
-            ),
-          })
-        : hslElement === "saturation"
-        ? this.setState({
-            hslColor2saturation: hslElementValue,
-            hslColor2:
-              "hsl(" +
-              this.state.hslColor2hue +
-              ", " +
-              hslElementValue +
-              "%, " +
-              this.state.hslColor2lightness +
-              "%)",
-            hexColor2: HSLToHex(
-              this.state.hslColor2hue,
-              hslElementValue,
-              this.state.hslColor2lightness
-            ),
-          })
-        : this.setState({
-            hslColor2lightness: hslElementValue,
-            hslColor2:
-              "hsl(" +
-              this.state.hslColor2hue +
-              ", " +
-              this.state.hslColor2saturation +
-              "%, " +
-              hslElementValue +
-              "%)",
-            hexColor2: HSLToHex(
-              this.state.hslColor2hue,
-              this.state.hslColor2saturation,
-              hslElementValue
-            ),
-          })
-      : // Update third box HSL color
-      hslElement === "hue"
-      ? this.setState({
-          hslColor3hue: hslElementValue,
-          hslColor3:
-            "hsl(" +
-            hslElementValue +
-            ", " +
-            this.state.hslColor3saturation +
-            "%, " +
-            this.state.hslColor3lightness +
-            "%)",
-          hexColor3: HSLToHex(
-            hslElementValue,
-            this.state.hslColor3saturation,
-            this.state.hslColor3lightness
-          ),
-        })
-      : hslElement === "saturation"
-      ? this.setState({
-          hslColor3saturation: hslElementValue,
-          hslColor3:
-            "hsl(" +
-            this.state.hslColor3hue +
-            ", " +
-            hslElementValue +
-            "%, " +
-            this.state.hslColor3lightness +
-            "%)",
-          hexColor3: HSLToHex(
-            this.state.hslColor3hue,
-            hslElementValue,
-            this.state.hslColor3lightness
-          ),
-        })
-      : this.setState({
-          hslColor3lightness: hslElementValue,
-          hslColor3:
-            "hsl(" +
-            this.state.hslColor3hue +
-            ", " +
-            this.state.hslColor3saturation +
-            "%, " +
-            hslElementValue +
-            "%)",
-          hexColor3: HSLToHex(
-            this.state.hslColor3hue,
-            this.state.hslColor3saturation,
-            hslElementValue
-          ),
-        });
+        colorNumber === 2
+        ? hslElement === "hue"
+          ? this.setState({
+              hslColor2hue: hslElementValue,
+              hslColor2:
+                "hsl(" +
+                hslElementValue +
+                ", " +
+                this.state.hslColor2saturation +
+                "%, " +
+                this.state.hslColor2lightness +
+                "%)",
+              hexColor2: HSLToHex(
+                hslElementValue,
+                this.state.hslColor2saturation,
+                this.state.hslColor2lightness,
+              ),
+            })
+          : hslElement === "saturation"
+            ? this.setState({
+                hslColor2saturation: hslElementValue,
+                hslColor2:
+                  "hsl(" +
+                  this.state.hslColor2hue +
+                  ", " +
+                  hslElementValue +
+                  "%, " +
+                  this.state.hslColor2lightness +
+                  "%)",
+                hexColor2: HSLToHex(
+                  this.state.hslColor2hue,
+                  hslElementValue,
+                  this.state.hslColor2lightness,
+                ),
+              })
+            : this.setState({
+                hslColor2lightness: hslElementValue,
+                hslColor2:
+                  "hsl(" +
+                  this.state.hslColor2hue +
+                  ", " +
+                  this.state.hslColor2saturation +
+                  "%, " +
+                  hslElementValue +
+                  "%)",
+                hexColor2: HSLToHex(
+                  this.state.hslColor2hue,
+                  this.state.hslColor2saturation,
+                  hslElementValue,
+                ),
+              })
+        : // Update third box HSL color
+          hslElement === "hue"
+          ? this.setState({
+              hslColor3hue: hslElementValue,
+              hslColor3:
+                "hsl(" +
+                hslElementValue +
+                ", " +
+                this.state.hslColor3saturation +
+                "%, " +
+                this.state.hslColor3lightness +
+                "%)",
+              hexColor3: HSLToHex(
+                hslElementValue,
+                this.state.hslColor3saturation,
+                this.state.hslColor3lightness,
+              ),
+            })
+          : hslElement === "saturation"
+            ? this.setState({
+                hslColor3saturation: hslElementValue,
+                hslColor3:
+                  "hsl(" +
+                  this.state.hslColor3hue +
+                  ", " +
+                  hslElementValue +
+                  "%, " +
+                  this.state.hslColor3lightness +
+                  "%)",
+                hexColor3: HSLToHex(
+                  this.state.hslColor3hue,
+                  hslElementValue,
+                  this.state.hslColor3lightness,
+                ),
+              })
+            : this.setState({
+                hslColor3lightness: hslElementValue,
+                hslColor3:
+                  "hsl(" +
+                  this.state.hslColor3hue +
+                  ", " +
+                  this.state.hslColor3saturation +
+                  "%, " +
+                  hslElementValue +
+                  "%)",
+                hexColor3: HSLToHex(
+                  this.state.hslColor3hue,
+                  this.state.hslColor3saturation,
+                  hslElementValue,
+                ),
+              });
   };
 
   updateRadioButtonChange = (selectednum, colorRatio) => {
@@ -350,6 +352,16 @@ class App extends React.Component {
     return resultArr;
   };
 
+  getColorState = (colorNum) => {
+    const stateKey = `hexColor${colorNum}`;
+    return this.state[stateKey] || "";
+  };
+
+  getContrastRatioState = (key) => {
+    const stateKey = `selectedContrastRatio${key}`;
+    return this.state[stateKey] || "";
+  };
+
   render() {
     let result = [];
     // GET RESULT ONLY WHEN ADJUSTABLE COLOR IS CHANGED
@@ -377,15 +389,15 @@ class App extends React.Component {
 
       result =
         this.colorResult(
-          eval(`this.state.hexColor${hexColor.charAt(0)}`),
-          eval(`this.state.hexColor${hexColor.charAt(1)}`),
-          eval(`this.state.selectedContrastRatio${this.state.selectedNumber}`)
+          this.getColorState(hexColor.charAt(0)),
+          this.getColorState(hexColor.charAt(1)),
+          this.getContrastRatioState(this.state.selectedNumber),
         ) || [];
     }
 
     return (
       <div className="App">
-        <h1>Color Contrast Calculator</h1>
+        <Header />
         <div className="flex-container">
           <ColorBox
             colorNumber={1}
@@ -445,6 +457,7 @@ class App extends React.Component {
           color3={this.state.hexColor3}
           selectedColor={this.state.colorsToChange.toString()}
         />
+        <Footer />
       </div>
     );
   }

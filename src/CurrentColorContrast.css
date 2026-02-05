@@ -1,3 +1,131 @@
 .currentContrastBox {
-  margin-left: 10px;
+  margin: 20px 0;
+  padding: 18px;
+  background: white;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.contrastHeader {
+  margin-bottom: 14px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 10px;
+}
+
+.contrastHeader h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 3px 0;
+  letter-spacing: 0.3px;
+}
+
+.contrastHeader p {
+  font-size: 11px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.contrastGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.contrastPair {
+  padding: 12px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.contrastPair:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.pairLabel {
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.pairContent {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ratio {
+  font-size: 20px;
+  font-weight: 800;
+  color: #3b82f6;
+  line-height: 1;
+}
+
+.standards {
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+}
+
+.standard {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 6px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.standard.pass {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.standard.fail {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.standardsLegend {
+  display: flex;
+  gap: 20px;
+  padding-top: 14px;
+  border-top: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legendDot.pass {
+  background-color: #22c55e;
+}
+
+.legendDot.fail {
+  background-color: #ef4444;
 }

@@ -23,10 +23,10 @@ npm run build    # Create production build
 
 ## Features
 
-- í¾¨ Interactive color picker with HSL and Hex controls
-- âœ… WCAG 2.1 compliance checking (AA and AAA levels)
-- í¾¯ Smart color suggestions that meet accessibility requirements
-- í³± Responsive, mobile-friendly design
+- ğŸ¨ Interactive color picker with HSL and Hex controls
+- âœ“ WCAG 2.1 compliance checking (AA and AAA levels)
+- â­ Smart color suggestions that meet accessibility requirements
+- ğŸ“± Responsive, mobile-friendly design
 - âš¡ Fast, real-time contrast calculations
 
 ---
